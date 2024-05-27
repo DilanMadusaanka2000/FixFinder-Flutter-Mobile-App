@@ -1,0 +1,42 @@
+  CircleAvatar(
+              radius: 70,
+              backgroundImage: AssetImage('assets/images/user.JPG'),
+            ),
+
+
+
+            Future<String?> _uploadProfileImage(File image) async {
+  try {
+    String fileName = path.basename(image.path);
+    Reference storageReference = FirebaseStorage.instance.ref().child('profileImages/$fileName');
+    UploadTask uploadTask = storageReference.putFile(image);
+    TaskSnapshot snapshot = await uploadTask.whenComplete(() => null);
+    return await snapshot.ref.getDownloadURL();
+  } catch (e) {
+    print(e);
+    return null;
+  }
+}
+
+
+
+// rules_version = '2';
+// service cloud.firestore {
+//   match /databases/{database}/documents {
+//     match /Employee/{document=**} {
+//       allow read, write: if request.auth != null;
+//     }
+//   }
+// }
+
+
+
+
+// rules_version = '2';
+// service cloud.firestore {
+//   match /databases/{database}/documents {
+//     match /Employee/{document=**} {
+//       allow read, write: if request.auth != null;
+//     }
+//   }
+// }

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "714592404471",
+    "project_id": "checkfirebase-f3ddc",
+    "storage_bucket": "checkfirebase-f3ddc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:714592404471:android:6ff3febc8ffcaef5f424f2",
+        "android_client_info": {
+          "package_name": "com.example.checkfirebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIzXp60lfynT8509KbE3DpQIiscpwX2ag"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
