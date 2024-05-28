@@ -23,3 +23,4 @@ final kCardButtonColor = Colors.grey[300];
 
 const kMainPinkColor = Colors.pink;
 const kGradientTopColor1 =Color.fromARGB(255, 92, 167, 221);
+const kButtonColorwithBlue = Color.fromARGB(255, 116, 197, 255);

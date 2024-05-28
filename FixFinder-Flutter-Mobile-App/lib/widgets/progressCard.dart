@@ -25,6 +25,8 @@ class _ProgresscardState extends State<Progresscard> {
           colors: [kGradientTopColor, kGradientBottomColor],
         ),
       ),
+
+
       child: const Padding(
         padding: const EdgeInsets.all(30),
         child: Column(

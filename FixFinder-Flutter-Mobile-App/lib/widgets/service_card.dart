@@ -40,7 +40,7 @@ class ServiceCard extends StatelessWidget {
         
             Text(
               title,
-              style: TextStyle(
+              style:const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
@@ -54,7 +54,7 @@ class ServiceCard extends StatelessWidget {
 
             Text(
               description,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.normal,
               ),

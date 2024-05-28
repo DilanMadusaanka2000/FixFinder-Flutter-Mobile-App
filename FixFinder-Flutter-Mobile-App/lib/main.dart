@@ -27,6 +27,8 @@ import 'package:checkfirebase/pages/addpage.dart';
 //   runApp(const MyApp());
 // }
 
+//firebase initialization
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
