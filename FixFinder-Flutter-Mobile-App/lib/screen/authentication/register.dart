@@ -1,3 +1,4 @@
+import 'package:checkfirebase/screens/client/client_home.dart';
 import 'package:checkfirebase/screens/client/client_main.dart';
 import 'package:flutter/material.dart';
 import 'package:checkfirebase/constants/colors.dart';
@@ -165,7 +166,7 @@ class _RegisterState extends State<Register> {
                             // Navigate to another screen upon successful registration
                                    Navigator.push(
                                                context,
-                                  MaterialPageRoute(builder: (context) => ClientMain()
+                                  MaterialPageRoute(builder: (context) => ClientHome()
                                   ),
                                     );
                                            }

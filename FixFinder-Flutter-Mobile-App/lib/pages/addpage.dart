@@ -116,6 +116,10 @@ class _AddPage extends State<AddPage> {
               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
 
+
+
+    
+
     final positionDropdown = DropdownButtonFormField<String>(
       value: _selectedPosition,
       items: positions.map((String value) {
@@ -309,7 +313,7 @@ class _AddPage extends State<AddPage> {
                     child: Text(
                       "Enter Your \nPersonal Details",
                       style: TextStyle(
-                        fontSize: 25,
+                        fontSize: 30,
                         fontWeight: FontWeight.w600,
                       ),
                     ),

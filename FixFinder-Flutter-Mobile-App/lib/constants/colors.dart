@@ -11,7 +11,7 @@ const Color cardColor = Color.fromARGB(255, 228, 222, 222);
 
 const Color darkBlue = Color(0xff244d61);
 
-const  kSubtitleColor = Color(0xFFA6A1A1);
+const kSubtitleColor = Color(0xFFA6A1A1);
 const kMainColor = Color(0xFF000000);
 const kMainWhiteColor = Color(0xFFFFFFFF);
 
@@ -22,5 +22,9 @@ const kCardBackgroundColor = Color(0xFFF5F5F5);
 final kCardButtonColor = Colors.grey[300];
 
 const kMainPinkColor = Colors.pink;
-const kGradientTopColor1 =Color.fromARGB(255, 92, 167, 221);
+const kGradientTopColor1 = Color.fromARGB(255, 92, 167, 221);
 const kButtonColorwithBlue = Color.fromARGB(255, 116, 197, 255);
+
+const kMainBkacgroundColor = Color.fromARGB(230, 125, 214, 255);
+
+

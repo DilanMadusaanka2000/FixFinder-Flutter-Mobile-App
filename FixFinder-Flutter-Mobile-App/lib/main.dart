@@ -1,6 +1,9 @@
 import 'dart:ffi';
 
 import 'package:checkfirebase/models/UserModel.dart';
+import 'package:checkfirebase/screen/authentication/authenticate.dart';
+import 'package:checkfirebase/screen/authentication/register.dart';
+import 'package:checkfirebase/screen/authentication/sign_in.dart';
 import 'package:checkfirebase/screen/wrapper.dart';
 import 'package:checkfirebase/screens/client/client_main.dart';
 import 'package:checkfirebase/service/auth.dart';
@@ -60,16 +63,18 @@ class MyApp extends StatelessWidget {
 
         ),
         debugShowCheckedModeBanner: false,
-         //home: Wrapper(),
+         home: Wrapper(),
 
        // home:  ClientMain(),
 
         // home:ScaleTransitionExampleApp(),
-       //home: HomePage(),
-       home: AddPage(),
+         //home: HomePage(),
+      // home: AddPage(),
+      
+       //home:Authenticate(),
+       //home:Register();
 
-
-        //home:AddPage(),
+       // home:AddPage(),
       ),
     );
   }

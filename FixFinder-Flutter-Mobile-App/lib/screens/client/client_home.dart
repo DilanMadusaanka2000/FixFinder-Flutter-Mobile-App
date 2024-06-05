@@ -6,6 +6,8 @@ import 'package:checkfirebase/screens/client/card/carpenter.dart';
 import 'package:checkfirebase/screens/client/card/gardning_mentainer.dart';
 import 'package:checkfirebase/screens/client/card/plumber.dart';
 import 'package:checkfirebase/screens/client/card/meason.dart';
+import 'package:checkfirebase/screens/serviceProvider/serviceProvider_profile.dart';
+import 'package:checkfirebase/service/check_Employer_hasData.dart';
 import 'package:checkfirebase/widgets/progressCard.dart';
 import 'package:checkfirebase/widgets/service_card.dart';
 import 'package:flutter/material.dart';
@@ -41,10 +43,34 @@ class _ClientHomeState extends State<ClientHome> {
               style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: kSubtitleColor),
               ),
 
-                     Text(
+                Text(
               "Hello, Dilan" , 
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900, color: kMainColor),
               ),
+
+
+              //button navigate profile 
+                 ElevatedButton(
+                      onPressed: () {
+                              
+                              Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => CheckEmployeeData()), // Navigate to the new screen
+                                   );
+                                        },
+                      style: ElevatedButton.styleFrom(
+                        iconColor: Colors.purple,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                      child: Text('Change Account'),
+                    ),
+
+
+
+
+
               const SizedBox(height:20),
               Progresscard(),
 
@@ -93,6 +119,9 @@ class _ClientHomeState extends State<ClientHome> {
                 ],
               ),
               const SizedBox(height: 20,),
+
+
+              //second row
                Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

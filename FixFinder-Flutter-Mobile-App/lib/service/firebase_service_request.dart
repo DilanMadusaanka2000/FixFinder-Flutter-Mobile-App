@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../models/response.dart';
@@ -15,6 +17,7 @@ class FirebaseRequestCrude {
     required String address,
     required String descreption,
     required String contactno,
+    required String date,
   }) async {
     Response response = Response();
     DocumentReference documentReference = _Collection.doc();
@@ -28,7 +31,8 @@ class FirebaseRequestCrude {
       "address": address,
       "description": descreption,
       "contact_no": contactno,
-      "emil": userEmail
+      "emil": userEmail,
+      "date":date
     };
 
     try {
@@ -47,6 +51,56 @@ class FirebaseRequestCrude {
 
     return response;
   }
+
+
+
+  //reade request 
+
+  static Stream<QuerySnapshot> readRequest(){
+
+    CollectionReference notesItemCollection =
+        _Collection;
+
+    return notesItemCollection.snapshots();
+
+
+  }
+
+
+
+
+  //delete request
+
+
+
+
+  static Future<Response> deleteEmployee({
+    required String docId,
+  }) async {
+     Response response = Response();
+    DocumentReference documentReferencer =
+        _Collection.doc(docId);
+
+    await documentReferencer
+        .delete()
+        .whenComplete((){
+          response.code = 200;
+          response.message = "Sucessfully Deleted Employee";
+        })
+        .catchError((e) {
+           response.code = 500;
+            response.message = e;
+        });
+
+   return response;
+  }
+  
+
+
+//update request 
+
+
+
 
 
 

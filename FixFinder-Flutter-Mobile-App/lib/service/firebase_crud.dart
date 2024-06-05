@@ -87,29 +87,34 @@ static Future<Response> addEmployee({
     required String experience,
   }) async {
     Response response = Response();
-    DocumentReference documentReferencer =
-        _Collection.doc(docId);
+    DocumentReference documentReferencer = _Collection.doc(docId);
 
     Map<String, dynamic> data = <String, dynamic>{
       "employee_name": name,
       "position": position,
       "district":distric,
-      "contact_no" : contactno
+      "contact_no" : contactno,
+      "experience":experience,
     };
+    print('Document ID to update: $docId'); // Debugging
 
-    await documentReferencer
-        .update(data)
-        .whenComplete(() {
-           response.code = 200;
-          response.message = "Sucessfully updated Employee";
-        })
-        .catchError((e) {
-            response.code = 500;
-            response.message = e;
-        });
+
+     try {
+    await documentReferencer.update(data);
+    response.code = 200;
+    response.message = "Successfully updated Employee";
+  } catch (e) {
+    response.code = 500;
+    response.message = e is FirebaseException ? e.message ?? "An error occurred" : "An unexpected error occurred";
+  }
 
         return response;
   }
+
+
+
+
+
 
 
 
@@ -138,4 +143,40 @@ static Future<Response> addEmployee({
 
    return response;
   }
+
+
+  //check the collection has data related to the Registration email
+
+
+  static Future<bool> employeeDataExists() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final User? user = await _auth.currentUser;
+    String? userEmail = user?.email;
+
+    if (userEmail == null) {
+      return false;
+    }
+
+    QuerySnapshot querySnapshot = await _Collection.where('email', isEqualTo: userEmail).get();
+
+    return querySnapshot.docs.isNotEmpty;
+  }
+
+
+
+
+
+
+// reade logine user data 
+
+static Stream<QuerySnapshot> readEmployeeForUser(String userEmail) {
+  
+     print('Querying for email: $userEmail');
+    return _Collection.where('email', isEqualTo: userEmail).snapshots();
+
+  }
+
+
+
+
 }
