@@ -4,10 +4,24 @@ import '../../service/firebase_service_request.dart'; // Import the CRUD service
 import '../../models/response.dart';
 
 class ClientRequest extends StatefulWidget {
-  const ClientRequest({super.key});
+ final String employeeName;
+ final String employeeId;
+
+
+  const ClientRequest({
+    
+    Key?key,
+
+    required this.employeeName,
+    required this.employeeId,
+
+    
+    
+    }): super(key: key);
 
   @override
   State<ClientRequest> createState() => _ClientRequestState();
+  
 }
 
 class _ClientRequestState extends State<ClientRequest> {
@@ -119,6 +133,10 @@ class _ClientRequestState extends State<ClientRequest> {
                       descreption: _descriptionController.text,
                       contactno: _contactNoController.text,
                       date: _dateController.text,
+                      employeeName: widget.employeeName,
+                      employeeId:widget.employeeId,
+                    
+
                     );
 
                     if (response.code == 200) {

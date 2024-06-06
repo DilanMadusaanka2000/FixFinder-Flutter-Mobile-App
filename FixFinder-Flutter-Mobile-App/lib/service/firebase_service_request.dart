@@ -18,6 +18,8 @@ class FirebaseRequestCrude {
     required String descreption,
     required String contactno,
     required String date,
+    required String employeeName,
+    required String employeeId,
   }) async {
     Response response = Response();
     DocumentReference documentReference = _Collection.doc();
@@ -32,7 +34,11 @@ class FirebaseRequestCrude {
       "description": descreption,
       "contact_no": contactno,
       "emil": userEmail,
-      "date":date
+      "date":date,
+      "employeeName":employeeName,
+      "employeeId":employeeId,
+
+     // "serviceProviderId":serviceProviderID,
     };
 
     try {
@@ -51,6 +57,8 @@ class FirebaseRequestCrude {
 
     return response;
   }
+
+
 
 
 

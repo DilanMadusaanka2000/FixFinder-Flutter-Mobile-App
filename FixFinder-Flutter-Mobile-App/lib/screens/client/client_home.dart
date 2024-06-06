@@ -6,6 +6,7 @@ import 'package:checkfirebase/screens/client/card/carpenter.dart';
 import 'package:checkfirebase/screens/client/card/gardning_mentainer.dart';
 import 'package:checkfirebase/screens/client/card/plumber.dart';
 import 'package:checkfirebase/screens/client/card/meason.dart';
+import 'package:checkfirebase/screens/request/client_request.dart';
 import 'package:checkfirebase/screens/serviceProvider/serviceProvider_profile.dart';
 import 'package:checkfirebase/service/check_Employer_hasData.dart';
 import 'package:checkfirebase/widgets/progressCard.dart';
@@ -66,6 +67,25 @@ class _ClientHomeState extends State<ClientHome> {
                       ),
                       child: Text('Change Account'),
                     ),
+                  
+                     //check req send data to the db 
+
+                    //  ElevatedButton(
+                    //   onPressed: () {
+                              
+                    //           Navigator.push(
+                    //           context,
+                    //           MaterialPageRoute(builder: (context) => ClientRequest()), // Navigate to the new screen
+                    //                );
+                    //                     },
+                    //   style: ElevatedButton.styleFrom(
+                    //     iconColor: Colors.purple,
+                    //     shape: RoundedRectangleBorder(
+                    //       borderRadius: BorderRadius.circular(20),
+                    //     ),
+                    //   ),
+                    //   child: Text('Request Service'),
+                    // ),
 
 
 

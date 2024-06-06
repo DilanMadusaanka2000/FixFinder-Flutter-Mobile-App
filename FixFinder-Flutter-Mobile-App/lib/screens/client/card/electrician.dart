@@ -1,4 +1,6 @@
 import 'package:checkfirebase/constants/colors.dart';
+import 'package:checkfirebase/models/employer.dart';
+import 'package:checkfirebase/screens/request/client_request.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
@@ -24,11 +26,7 @@ class _ElectricianState extends State<Electrician> {
             fontSize: 30,
           ),
         ),
-
-        // backgroundColor: Theme.of(context).primaryColor,
       ),
-
-      //backgroundColor: kMainBkacgroundColor,
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseCrud.readEmployee(),
         builder: (context, snapshot) {
@@ -45,26 +43,8 @@ class _ElectricianState extends State<Electrician> {
               itemBuilder: (context, index) {
                 var employee = employees[index];
 
-                Column(children: [
-                  // Add your photo here
-                  Container(
-                    margin: EdgeInsets.all(10),
-                    child: Image.asset(
-                      'assets/card/Technicians.jpg',  // Replace with your image asset or network image
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ]);
-
-
-
-
-
-
-
                 return Card(
-                  margin:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                  margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),
                   ),
@@ -112,6 +92,32 @@ class _ElectricianState extends State<Electrician> {
                             fontSize: 15,
                             fontWeight: FontWeight.w200,
                           ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            TextButton(
+                              onPressed: () {
+                                // Handle view button press
+                              },
+                              child: Text('View'),
+                            ),
+                            TextButton(
+                          onPressed: () {
+                              Navigator.push(
+                                   context,
+                                MaterialPageRoute(
+                                 builder: (context) => ClientRequest(
+                                  employeeName: employee['employee_name'],
+                                    employeeId: employee.id,
+                                        ),
+                                          ),
+                                     );
+                                          },
+
+                              child: Text('Hire'),
+                            ),
+                          ],
                         ),
                       ],
                     ),
