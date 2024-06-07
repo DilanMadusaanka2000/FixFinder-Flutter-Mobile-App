@@ -34,11 +34,11 @@ class FirebaseRequestCrude {
       "description": descreption,
       "contact_no": contactno,
       "emil": userEmail,
-      "date":date,
-      "employeeName":employeeName,
-      "employeeId":employeeId,
+      "date": date,
+      "employeeName": employeeName,
+      "employeeId": employeeId,
 
-     // "serviceProviderId":serviceProviderID,
+      // "serviceProviderId":serviceProviderID,
     };
 
     try {
@@ -58,62 +58,47 @@ class FirebaseRequestCrude {
     return response;
   }
 
+  //reade request
 
+  static Stream<QuerySnapshot> readRequest({required String? email}) {
+    CollectionReference requestCollection = _Collection;
+       return requestCollection.where('emil', isEqualTo: email).snapshots();
+    
 
-
-
-  //reade request 
-
-  static Stream<QuerySnapshot> readRequest(){
-
-    CollectionReference notesItemCollection =
-        _Collection;
-
-    return notesItemCollection.snapshots();
-
-
+    //return notesItemCollection.snapshots();
   }
+
 
 
 
 
   //delete request
 
-
-
-
   static Future<Response> deleteEmployee({
     required String docId,
   }) async {
-     Response response = Response();
-    DocumentReference documentReferencer =
-        _Collection.doc(docId);
+    Response response = Response();
+    DocumentReference documentReferencer = _Collection.doc(docId);
 
-    await documentReferencer
-        .delete()
-        .whenComplete((){
-          response.code = 200;
-          response.message = "Sucessfully Deleted Employee";
-        })
-        .catchError((e) {
-           response.code = 500;
-            response.message = e;
-        });
+    await documentReferencer.delete().whenComplete(() {
+      response.code = 200;
+      response.message = "Sucessfully Deleted Employee";
+    }).catchError((e) {
+      response.code = 500;
+      response.message = e;
+    });
 
-   return response;
+    return response;
   }
-  
 
+//update request
 
-//update request 
+//fetch data related to user
 
+  static Future<int> countRequestsForEmployee(String employeeId) async {
+    QuerySnapshot querySnapshot =
+        await _Collection.where('employeeId', isEqualTo: employeeId).get();
 
-
-
-
-
-
-
-
-  
+    return querySnapshot.size;
+  }
 }

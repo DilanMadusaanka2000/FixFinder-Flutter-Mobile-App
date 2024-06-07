@@ -158,17 +158,22 @@ class _EditPage extends State<EditPage> {
       ),
     );
 
-    final viewListButton = TextButton(
-      onPressed: () {
-        Navigator.pushAndRemoveUntil<dynamic>(
-          context,
-          MaterialPageRoute<dynamic>(
-            builder: (BuildContext context) => ClientHome(),
-          ),
-          (route) => false,
-        );
-      },
-      child: const Text('View Profile'),
+    final viewListButton = Center(
+      child: TextButton(
+        onPressed: () {
+          Navigator.pushAndRemoveUntil<dynamic>(
+            context,
+            MaterialPageRoute<dynamic>(
+              builder: (BuildContext context) => ClientHome(),
+            ),
+            (route) => false,
+          );
+        },
+        child: const Text(
+          'View Profile',
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
     );
 
     final saveButton = Material(
@@ -221,36 +226,81 @@ class _EditPage extends State<EditPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: const Text('Edit Profile'),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Form(
-            key: _formKey,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  const SizedBox(height: 25.0),
-                  nameField,
-                  const SizedBox(height: 25.0),
-                  positionField,
-                  const SizedBox(height: 35.0),
-                  experienceField,
-                  const SizedBox(height: 35.0),
-                  contactField,
-                  viewListButton,
-                  const SizedBox(height: 45.0),
-                  saveButton,
-                  const SizedBox(height: 15.0),
-                ],
-              ),
+          title: const Text(
+            'Edit  Profile',
+            style: TextStyle(fontWeight: FontWeight.w800, fontSize: 30),
+          ),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.home),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ClientHome()));
+              },
+            ),
+          ]),
+      body: Padding(
+        padding: const EdgeInsets.only(top: 50.0),
+        child: Container(
+          decoration: const BoxDecoration(
+            color: Color.fromARGB(255, 98, 158, 241),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(70),
+              topRight: Radius.circular(70),
+              bottomLeft: Radius.circular(20),
+              bottomRight: Radius.circular(20),
             ),
           ),
-        ],
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Form(
+                key: _formKey,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      const SizedBox(height: 25.0),
+                      Text(
+                        "Name",
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.w200),
+                      ),
+                      nameField,
+                      const SizedBox(height: 25.0),
+                      Text(
+                        "Posittion",
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.w200),
+                      ),
+                      positionField,
+                      const SizedBox(height: 35.0),
+                      Text(
+                        "Experience",
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.w200),
+                      ),
+                      experienceField,
+                      const SizedBox(height: 35.0),
+                      Text(
+                        "Contatct",
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.w200),
+                      ),
+                      contactField,
+                      viewListButton,
+                      const SizedBox(height: 45.0),
+                      saveButton,
+                      const SizedBox(height: 15.0),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

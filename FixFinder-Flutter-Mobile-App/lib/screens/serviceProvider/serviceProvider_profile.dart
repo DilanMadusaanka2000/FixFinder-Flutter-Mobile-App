@@ -1,12 +1,10 @@
 import 'package:checkfirebase/pages/editpage.dart';
+import 'package:checkfirebase/service/firebase_service_request.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:checkfirebase/service/firebase_crud.dart';
 import 'package:checkfirebase/models/employer.dart';
-
-
-
 class Profile extends StatefulWidget {
   const Profile({super.key});
 
@@ -17,11 +15,30 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   User? user;
+  int requestCount = 0;
 
   @override
   void initState() {
     super.initState();
     user = _auth.currentUser;
+    if (user != null) {
+      _fetchRequestCount();
+    }
+  }
+
+  Future<void> _fetchRequestCount() async {
+    if (user != null) {
+      String userEmail = user!.email!;
+      QuerySnapshot querySnapshot = await FirebaseCrud.readEmployeeForUser(userEmail).first;
+      if (querySnapshot.docs.isNotEmpty) {
+        var userData = querySnapshot.docs.first.data() as Map<String, dynamic>;
+        String employeeId = querySnapshot.docs.first.id; // Get the document ID
+        int count = await FirebaseRequestCrude.countRequestsForEmployee(employeeId);
+        setState(() { 
+          requestCount = count;    // rebuild ()
+        });
+      }
+    }
   }
 
   @override
@@ -49,7 +66,7 @@ class _ProfileState extends State<Profile> {
                     children: [
                       Container(
                         decoration: const BoxDecoration(
-                          color: Colors.blue,
+                          color: Color.fromARGB(255, 20, 53, 189),
                           borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(30),
                             bottomRight: Radius.circular(30),
@@ -68,19 +85,45 @@ class _ProfileState extends State<Profile> {
                                   ),
                                 ],
                               ),
-                              const Row(
+                              Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
+                                  const Text(
                                     "Profile",
-                                    style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w500),
+                                    style: TextStyle(color: Color.fromARGB(255, 255, 255, 255), fontSize: 30, fontWeight: FontWeight.w800),
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => EditPage(
+                                            employee: Employee(
+                                              uid: docId,
+                                              employeename: userData["employee_name"],
+                                              position: userData["position"],
+                                              contactno: userData["contact_no"],
+                                              experience: userData["experience"],
+                                              district: userData["district"],
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      iconColor: const Color.fromARGB(255, 78, 158, 224),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                    ),
+                                    child: const Text('Edit'),
                                   ),
                                 ],
                               ),
                               const SizedBox(height: 20),
                               CircleAvatar(
                                 radius: 50,
-                                backgroundColor: Colors.yellow,
+                                backgroundColor: const Color.fromARGB(255, 255, 254, 247),
                                 backgroundImage: userData['profilePictureUrl'] != null
                                     ? NetworkImage(userData['profilePictureUrl']) as ImageProvider<Object>?
                                     : const AssetImage('assets/avatar.jpg') as ImageProvider<Object>?, // Replace with your default image asset
@@ -89,8 +132,9 @@ class _ProfileState extends State<Profile> {
                               Text(
                                 userData['employee_name'] ?? 'No Name',
                                 style: const TextStyle(
-                                  fontSize: 30,
+                                  fontSize: 20,
                                   fontWeight: FontWeight.bold,
+                                  color: Colors.black87,
                                 ),
                               ),
                             ],
@@ -106,30 +150,31 @@ class _ProfileState extends State<Profile> {
                             ProfileDetailField('Experience:', userData['experience']),
                             ProfileDetailField('District:', userData['district']),
                             ProfileDetailField('Contact No:', userData['contact_no']),
-                            ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => EditPage(
-                                      employee: Employee(
-                                        uid: docId,
-                                        employeename: userData["employee_name"],
-                                        position: userData["position"],
-                                        contactno: userData["contact_no"],
-                                        experience: userData["experience"],
-                                        district: userData["district"],
+                            const SizedBox(height: 10,),
+                            Row(
+                              children: [
+                                Container(
+                                  height: 30 * 5.0,
+                                  width: 20 * 5.0,
+                                  decoration: BoxDecoration(
+                                    color: Color.fromARGB(255, 39, 98, 247),
+                                    border: Border.all(
+                                      color: Color.fromARGB(255, 12, 108, 177),
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      'Hire \n($requestCount)', // Display the request count
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w400,
                                       ),
                                     ),
                                   ),
-                                );
-                              },
-                              style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
                                 ),
-                              ),
-                              child: const Text('Edit Account'),
+                              ],
                             ),
                           ],
                         ),

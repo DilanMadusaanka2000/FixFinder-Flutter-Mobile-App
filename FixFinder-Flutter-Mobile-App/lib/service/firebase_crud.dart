@@ -169,9 +169,9 @@ static Future<Response> addEmployee({
 
 // reade logine user data 
 
-static Stream<QuerySnapshot> readEmployeeForUser(String userEmail) {
+    static Stream<QuerySnapshot> readEmployeeForUser(String userEmail) {
   
-     print('Querying for email: $userEmail');
+     print('Login email: $userEmail');
     return _Collection.where('email', isEqualTo: userEmail).snapshots();
 
   }

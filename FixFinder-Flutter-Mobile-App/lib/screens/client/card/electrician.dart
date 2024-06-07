@@ -1,6 +1,7 @@
 import 'package:checkfirebase/constants/colors.dart';
 import 'package:checkfirebase/models/employer.dart';
 import 'package:checkfirebase/screens/request/client_request.dart';
+import 'package:checkfirebase/screens/serviceProvider/Profile_client_view.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
@@ -93,15 +94,30 @@ class _ElectricianState extends State<Electrician> {
                             fontWeight: FontWeight.w200,
                           ),
                         ),
+
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             TextButton(
                               onPressed: () {
-                                // Handle view button press
+
+                                Navigator.push(
+                                   context,
+                                MaterialPageRoute(
+                                 builder: (context) => CLientViewProfile(
+                                  employeeName: employee['employee_name'],
+                                    employeeId: employee.id,
+                                    
+                                        ),
+                                          ),
+                                     );
                               },
                               child: Text('View'),
                             ),
+
+
+
+
                             TextButton(
                           onPressed: () {
                               Navigator.push(

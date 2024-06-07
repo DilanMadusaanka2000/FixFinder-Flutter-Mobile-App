@@ -82,7 +82,7 @@ class _ClientMainState extends State<ClientMain> {
 
 
             BottomNavigationBarItem(icon: Icon(Icons.book),
-            label: "Booking",
+            label: "Hirring",
 
             ),
 
