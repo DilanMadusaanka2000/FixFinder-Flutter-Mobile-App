@@ -45,7 +45,7 @@ class _ClientHomeState extends State<ClientHome> {
               ),
 
                 Text(
-              "Hello, Dilan" , 
+              "FIXfinder" , 
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900, color: kMainColor),
               ),
 

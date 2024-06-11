@@ -62,15 +62,17 @@ class FirebaseRequestCrude {
 
   static Stream<QuerySnapshot> readRequest({required String? email}) {
     CollectionReference requestCollection = _Collection;
-       return requestCollection.where('emil', isEqualTo: email).snapshots();
-    
+    return requestCollection.where('emil', isEqualTo: email).snapshots();
 
     //return notesItemCollection.snapshots();
   }
 
 
+  //GET hirring request details
 
-
+  static Stream<QuerySnapshot> readRequestsByEmployeeId(String employeeId) {
+    return _Collection.where('employeeId', isEqualTo: employeeId).snapshots();
+  }
 
   //delete request
 

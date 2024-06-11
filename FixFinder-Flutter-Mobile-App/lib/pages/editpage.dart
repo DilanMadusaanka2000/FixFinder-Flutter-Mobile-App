@@ -1,5 +1,6 @@
 import 'package:checkfirebase/pages/listpage.dart';
 import 'package:checkfirebase/screens/client/client_home.dart';
+import 'package:checkfirebase/screens/client/client_main.dart';
 import 'package:checkfirebase/screens/serviceProvider/serviceProvider_profile.dart';
 import 'package:flutter/material.dart';
 
@@ -164,7 +165,7 @@ class _EditPage extends State<EditPage> {
           Navigator.pushAndRemoveUntil<dynamic>(
             context,
             MaterialPageRoute<dynamic>(
-              builder: (BuildContext context) => ClientHome(),
+              builder: (BuildContext context) => ClientMain(),
             ),
             (route) => false,
           );

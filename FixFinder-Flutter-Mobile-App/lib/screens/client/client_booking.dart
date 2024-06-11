@@ -46,6 +46,7 @@ class _ClientBookinState extends State<ClientBookin> {
                       var requestData = requestDocs[index].data() as Map<String, dynamic>;
                       return Card(
                         margin: EdgeInsets.all(10),
+                        color: const Color.fromARGB(255, 101, 183, 238),
                         child: ListTile(
                           title: Text(requestData['client_name'] ?? 'No name'),
                           subtitle: Column(

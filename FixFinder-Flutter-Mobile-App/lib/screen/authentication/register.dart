@@ -7,7 +7,6 @@ import 'package:checkfirebase/constants/styles.dart';
 import 'package:checkfirebase/service/auth.dart';
 import 'package:checkfirebase/pages/addpage.dart';
 
-
 //import '../../pages/addpage.dart';
 
 class Register extends StatefulWidget {
@@ -83,7 +82,7 @@ class _RegisterState extends State<Register> {
                         ),
 
                         TextFormField(
-                           obscureText: true,
+                          obscureText: true,
                           decoration: textInputDecoration.copyWith(
                               hintText: "password"),
                           validator: (val) =>
@@ -98,8 +97,8 @@ class _RegisterState extends State<Register> {
                         const SizedBox(
                           height: 20,
                         ),
-                           //error text    
-                           Text(error, style:TextStyle(color: Colors.red)),
+                        //error text
+                        Text(error, style: TextStyle(color: Colors.red)),
                         const Text(
                           "Login With Google Account",
                           style: descriptionStyle,
@@ -162,14 +161,14 @@ class _RegisterState extends State<Register> {
                               setState(() {
                                 error = " Please enter valid email";
                               });
-                            }  else {
-                            // Navigate to another screen upon successful registration
-                                   Navigator.push(
-                                               context,
-                                  MaterialPageRoute(builder: (context) => ClientHome()
-                                  ),
-                                    );
-                                           }
+                            } else {
+                              // Navigate to another screen upon successful registration
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ClientHome()),
+                              );
+                            }
                           },
                           child: Container(
                             height: 40,
@@ -197,10 +196,6 @@ class _RegisterState extends State<Register> {
         ));
   }
 }
-
-
-
-
 
 // ElevatedButton(
 //         child: const Text("Sign Inn anonmously"),

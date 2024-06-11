@@ -1,3 +1,6 @@
+import 'package:checkfirebase/screens/request/client_review.dart';
+import 'package:checkfirebase/service/firebase_service_request.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:checkfirebase/service/firebase_crud.dart';
@@ -17,13 +20,46 @@ class CLientViewProfile extends StatefulWidget {
 }
 
 class _CLientViewProfileState extends State<CLientViewProfile> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  User? user;
+  int requestCount = 0;
+
+
   Map<String, dynamic>? employeeData;
 
   @override
   void initState() {
     super.initState();
+    user = _auth.currentUser;
+
     fetchEmployeeData();
+    if(user!=null){
+         _fetchRequestCount();
+
+    }
   }
+
+
+
+ Future<void> _fetchRequestCount() async {
+    if (user != null) {
+      String userEmail = user!.email!;
+      QuerySnapshot querySnapshot = await FirebaseCrud.readEmployeeForUser(userEmail).first;
+      if (querySnapshot.docs.isNotEmpty) {
+        var userData = querySnapshot.docs.first.data() as Map<String, dynamic>;
+        String employeeId = querySnapshot.docs.first.id; // Get the document ID
+        int count = await FirebaseRequestCrude.countRequestsForEmployee(employeeId);
+        setState(() { 
+          requestCount = count;    // rebuild ()
+        });
+      }
+    }
+  }
+
+
+
+
+
 
   void fetchEmployeeData() async {
     try {
@@ -170,8 +206,44 @@ class _CLientViewProfileState extends State<CLientViewProfile> {
                         ProfileDetailField('Contact No:',
                             employeeData!['contact_no']),
                       ],
+                    
                     ),
+                    
                   ),
+               Row(
+  children: [
+   const Text(
+      'Hire', // Display the request count
+      textAlign: TextAlign.start, // Center-align the text
+      style: const TextStyle(
+       // backgroundColor: Color.fromARGB(255, 39, 98, 247), // Background color
+        color: Color.fromARGB(255, 0, 0, 0),
+        fontSize: 0,
+        fontWeight: FontWeight.w400,
+      ),
+    ),
+    Text(" $requestCount",style: const TextStyle(color: Colors.black,fontSize: 30,fontWeight: FontWeight.w500),)
+  ],
+),
+
+ Row(children: [
+
+  ElevatedButton(
+  onPressed: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ClientReviewScreen(employeeId: widget.employeeId),
+      ),
+    );
+  },
+  child: Text('Reviews & Ratings'),
+),
+ ],),
+
+
+      
+
                 ],
               ),
             )

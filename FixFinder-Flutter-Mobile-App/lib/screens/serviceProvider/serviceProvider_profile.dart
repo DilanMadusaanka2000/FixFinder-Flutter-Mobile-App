@@ -1,4 +1,5 @@
 import 'package:checkfirebase/pages/editpage.dart';
+import 'package:checkfirebase/screens/request/client_review.dart';
 import 'package:checkfirebase/service/firebase_service_request.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -66,7 +67,15 @@ class _ProfileState extends State<Profile> {
                     children: [
                       Container(
                         decoration: const BoxDecoration(
-                          color: Color.fromARGB(255, 20, 53, 189),
+                          //color: Color.fromARGB(255, 20, 53, 189),
+                          gradient: LinearGradient(colors: [Color.fromARGB(255, 0, 114, 207), Color.fromARGB(255, 98, 199, 246)],
+                          begin:Alignment.topLeft,
+                          end:Alignment.bottomRight),
+                          boxShadow: [
+                            BoxShadow(color: Colors.black12,
+                            offset:Offset(0, 4),
+                            blurRadius: 10,)
+                          ],
                           borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(30),
                             bottomRight: Radius.circular(30),
@@ -145,35 +154,86 @@ class _ProfileState extends State<Profile> {
                         padding: const EdgeInsets.all(16.0),
                         child: Column(
                           children: [
-                            ProfileDetailField('Full Name :', userData['employee_name']),
+                            Column(
+                              children: [
+                                ProfileDetailField('Full Name :', userData['employee_name']),
+                              ],
+                            ),
                             ProfileDetailField('Position:', userData['position']),
                             ProfileDetailField('Experience:', userData['experience']),
                             ProfileDetailField('District:', userData['district']),
                             ProfileDetailField('Contact No:', userData['contact_no']),
                             const SizedBox(height: 10,),
-                            Row(
-                              children: [
-                                Container(
-                                  height: 30 * 5.0,
-                                  width: 20 * 5.0,
-                                  decoration: BoxDecoration(
-                                    color: Color.fromARGB(255, 39, 98, 247),
-                                    border: Border.all(
-                                      color: Color.fromARGB(255, 12, 108, 177),
-                                    ),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      'Hire \n($requestCount)', // Display the request count
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w400,
+
+                             Row(
+                                 children: [
+                                 const Text(
+                                'Hire', // Display the request count
+                                 textAlign: TextAlign.start, // Center-align the text
+                                  style:  TextStyle(
+                                 backgroundColor: Color.fromARGB(255, 5, 43, 180), // Background color
+                                  color: Color.fromARGB(255, 255, 255, 255),
+                                fontSize: 15,
+                                fontWeight: FontWeight.w400,
+                                ),
+                              ),
+
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(" $requestCount",
+                                    style: 
+                                    const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.w500
+                                      ),
+                                      ),
+
+                                     const SizedBox(width: 5),
+                                    ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => EditPage(
+                                            employee: Employee(
+                                              uid: docId,
+                                              employeename: userData["employee_name"],
+                                              
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      //iconColor: const Color.fromARGB(255, 78, 158, 224),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
                                       ),
                                     ),
+                                    child: const Text('See',style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w200,
+                                    ),),
                                   ),
+                                  ],
+
+                                 
+                                  
                                 ),
+
+                             
+                                
+
+
+                                
+                                
+
+
+
+
                               ],
                             ),
                           ],
@@ -189,6 +249,12 @@ class _ProfileState extends State<Profile> {
   }
 }
 
+
+
+
+
+
+
 class ProfileDetailField extends StatelessWidget {
   final String label;
   final String value;
@@ -200,9 +266,9 @@ class ProfileDetailField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: const Color.fromARGB(255, 76, 172, 251)), // Add border decoration
-          borderRadius: BorderRadius.circular(10), // Optional: Add border radius
+        decoration:const BoxDecoration(
+          //border: Border.all(color: Color.fromARGB(255, 0, 0, 0)), // Add border decoration
+          //borderRadius: BorderRadius.circular(10), // Optional: Add border radius
         ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
