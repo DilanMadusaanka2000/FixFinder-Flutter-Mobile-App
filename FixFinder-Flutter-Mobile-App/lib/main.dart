@@ -6,6 +6,7 @@ import 'package:checkfirebase/screen/authentication/register.dart';
 import 'package:checkfirebase/screen/authentication/sign_in.dart';
 import 'package:checkfirebase/screen/wrapper.dart';
 import 'package:checkfirebase/screens/client/client_main.dart';
+import 'package:checkfirebase/screens/onbordScreen/onboardscreen.dart';
 import 'package:checkfirebase/screens/request/client_request.dart';
 import 'package:checkfirebase/service/auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -65,6 +66,7 @@ class MyApp extends StatelessWidget {
         ),
         debugShowCheckedModeBanner: false,
          home: Wrapper(),
+         //home:OnordingScreen(),
 
 
          // home: ClientRequest(),

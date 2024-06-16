@@ -119,20 +119,9 @@ class _ClientReviewScreenState extends State<ClientReviewScreen> {
                     itemCount: reviews.length,
                     itemBuilder: (context, index) {
                       final review = reviews[index];
-                      return Expanded(
-                        
-                        child:
-                        
-                         Container(
-                           child: Row(
-                            children: [
-                              ListTile(
-                                title: Text(review['review']),
-                                subtitle: Text('Rating: ${review['rating']}'),
-                              ),
-                            ],
-                                                   ),
-                         ),
+                      return ListTile(
+                        title: Text(review['review']),
+                        subtitle: Text('Rating: ${review['rating']}'),
                       );
                     },
                   );
