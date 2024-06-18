@@ -18,7 +18,7 @@ class _GardningMentainerState extends State<GardningMentainer> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text(
-          " Electricians",
+          " Gardning Maintance",
           style: TextStyle(
             fontWeight: FontWeight.w500,
             fontSize: 30,

@@ -4,15 +4,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class ClientReviewScreen extends StatefulWidget {
   final String employeeId;
+  final String clientName;
 
-  const ClientReviewScreen({Key? key, required this.employeeId}) : super(key: key);
+  const ClientReviewScreen({Key? key, required this.employeeId, required this.clientName})
+      : super(key: key);
 
   @override
   _ClientReviewScreenState createState() => _ClientReviewScreenState();
 }
 
 class _ClientReviewScreenState extends State<ClientReviewScreen> {
-  
   final TextEditingController _reviewController = TextEditingController();
   int _rating = 0;
 
@@ -22,6 +23,7 @@ class _ClientReviewScreenState extends State<ClientReviewScreen> {
       try {
         await FirebaseFirestore.instance.collection('reviews').add({
           'employeeId': widget.employeeId,
+          'clientName': widget.clientName,
           'userId': user.uid,
           'review': _reviewController.text,
           'rating': _rating,
@@ -31,13 +33,25 @@ class _ClientReviewScreenState extends State<ClientReviewScreen> {
         setState(() {
           _rating = 0;
         });
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Review submitted successfully')));
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Review submitted successfully')));
       } catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error submitting review: $e')));
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Error submitting review: $e')));
       }
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please provide a rating and a review')));
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Please provide a rating and a review')));
     }
+  }
+
+  List<Widget> _buildRatingStars(int rating) {
+    return List.generate(5, (index) {
+      return Icon(
+        index < rating ? Icons.star : Icons.star_border,
+        color: Colors.amber,
+      );
+    });
   }
 
   @override
@@ -91,7 +105,9 @@ class _ClientReviewScreenState extends State<ClientReviewScreen> {
                     return Center(child: CircularProgressIndicator());
                   }
                   if (snapshot.hasError) {
-                    if (snapshot.error.toString().contains('FAILED_PRECONDITION')) {
+                    if (snapshot.error
+                        .toString()
+                        .contains('FAILED_PRECONDITION')) {
                       return Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -120,8 +136,19 @@ class _ClientReviewScreenState extends State<ClientReviewScreen> {
                     itemBuilder: (context, index) {
                       final review = reviews[index];
                       return ListTile(
-                        title: Text(review['review']),
-                        subtitle: Text('Rating: ${review['rating']}'),
+                        title: Text(
+                          review['clientName'],
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: _buildRatingStars(review['rating']),
+                            ),
+                            Text(review['review']),
+                          ],
+                        ),
                       );
                     },
                   );

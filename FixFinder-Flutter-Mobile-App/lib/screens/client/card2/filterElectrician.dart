@@ -1,23 +1,19 @@
-import 'package:checkfirebase/screens/client/card2/filterElectrician.dart';
-import 'package:checkfirebase/screens/client/client_home.dart';
 import 'package:checkfirebase/screens/client/client_main.dart';
 import 'package:checkfirebase/screens/request/client_request.dart';
 import 'package:checkfirebase/screens/serviceProvider/Profile_client_view.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-//import 'client_main.dart';
 import '../../../service/firebase_crud.dart';
-//import 'Profile_client_view.dart';
-//import 'client_request.dart';
 
-class Electrician extends StatefulWidget {
-  const Electrician({super.key});
+class Filterelectrician extends StatefulWidget {
+  final String selectedValue;
+  const Filterelectrician({super.key, required this.selectedValue});
 
   @override
-  State<Electrician> createState() => _ElectricianState();
+  State<Filterelectrician> createState() => _FilterelectricianState();
 }
 
-class _ElectricianState extends State<Electrician> {
+class _FilterelectricianState extends State<Filterelectrician> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +27,6 @@ class _ElectricianState extends State<Electrician> {
           ),
         ),
         actions: [
-
           IconButton(
             icon: Icon(Icons.home),
             onPressed: () {
@@ -42,47 +37,15 @@ class _ElectricianState extends State<Electrician> {
             },
           ),
         ],
-        
       ),
       body: Column(
-
-        
-
-        
         children: [
-       Row(
-  mainAxisAlignment: MainAxisAlignment.end,
-  children: [
-    Container(
-      margin: EdgeInsets.all(10), // Adjust margin as needed
-      child: ElevatedButton(
-        onPressed: () => _showDialog(context),
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Color.fromARGB(255, 0, 0, 0), // Background color
-          //onPrimary: Colors.white, // Text color
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8), // Rounded corners
-          ),
-        ),
-        child: Text("Filter", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
-      ),
-    ),
-  ],
-)
-,
-
-          // Adding the PNG file below the AppBar
           Image.asset(
             'assets/card/electricity.png',
-            height: 260, // Adjust the height as needed
+            height: 260,
             width: double.infinity,
             fit: BoxFit.cover,
           ),
-
-
-
-
           Expanded(
             child: StreamBuilder<QuerySnapshot>(
               stream: FirebaseCrud.readEmployee(),
@@ -92,41 +55,35 @@ class _ElectricianState extends State<Electrician> {
                 }
 
                 final employees = snapshot.data!.docs.where((doc) {
-                  return doc['position'] == 'Electrician';
+                  return doc['position'] == 'Electrician' && doc['district'] == widget.selectedValue;
                 }).toList();
 
                 return ListView.builder(
                   itemCount: employees.length,
                   itemBuilder: (context, index) {
-                     Map<String, dynamic> data = snapshot.data!.docs[index].data() as Map<String, dynamic>;
-                      Color backgroundColor = (index % 2 == 0) ? Colors.blue : Colors.white;
-                      Color textColor = (index % 2 == 0) ? Colors.white : Colors.black;
+                    Map<String, dynamic> data = snapshot.data!.docs[index].data() as Map<String, dynamic>;
+                    Color backgroundColor = (index % 2 == 0) ? Colors.blue : Colors.white;
+                    Color textColor = (index % 2 == 0) ? Colors.white : Colors.black;
                     var employee = employees[index];
-
 
                     return Card(
                       color: backgroundColor,
                       margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15.0),
-                        
                       ),
                       child: ListTile(
                         leading: CircleAvatar(
                           radius: 30,
-                          backgroundImage: employee['profilePictureUrl'] != null
-                              ? NetworkImage(employee['profilePictureUrl'])
-                              : null,
-                          child: employee['profilePictureUrl'] == null
-                              ? Icon(Icons.person)
-                              : null,
+                          backgroundImage: employee['profilePictureUrl'] != null ? NetworkImage(employee['profilePictureUrl']) : null,
+                          child: employee['profilePictureUrl'] == null ? Icon(Icons.person) : null,
                         ),
                         title: Padding(
                           padding: const EdgeInsets.all(8),
                           child: Text(
                             employee['employee_name'],
-                            style:  TextStyle(
-                              color:textColor,
+                            style: TextStyle(
+                              color: textColor,
                               fontSize: 20,
                               fontWeight: FontWeight.w200,
                             ),
@@ -137,15 +94,15 @@ class _ElectricianState extends State<Electrician> {
                           children: [
                             Text(
                               'Experience: ${employee['experience']}',
-                              style:  TextStyle(
+                              style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w200,
-                                color: textColor
+                                color: textColor,
                               ),
                             ),
                             Text(
                               'Contact No: ${employee['contact_no']}',
-                              style:  TextStyle(
+                              style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w200,
                                 color: textColor,
@@ -153,7 +110,7 @@ class _ElectricianState extends State<Electrician> {
                             ),
                             Text(
                               'District: ${employee['district']}',
-                              style:  TextStyle(
+                              style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w200,
                                 color: textColor,
@@ -203,74 +160,6 @@ class _ElectricianState extends State<Electrician> {
           ),
         ],
       ),
-    );
-  }
-  void _showDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        String? selectedValue;
-        return AlertDialog(
-          title: Text('District'),
-          content: StatefulBuilder(
-            builder: (BuildContext context, StateSetter setState) {
-              return Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  DropdownButton<String>(
-                    hint: Text('Select District'),
-                    value: selectedValue,
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        selectedValue = newValue;
-                      });
-                      if (newValue != null) {
-                        Navigator.of(context).pop();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Filterelectrician(selectedValue: newValue),
-                          ),
-                        );
-                      }
-                    },
-                    items: <String>[ 'Colombo',
-    'Gampaha',
-    'Kalutara',
-    'Kandy',
-    'Matale',
-    'Nuwara Eliya',
-    'Galle',
-    'Matara',
-    'Hambantota',
-    'Jaffna',
-    'Kilinochchi',
-    'Mannar',
-    'Mullaitivu',
-    'Vavuniya',
-    'Puttalam',
-    'Kurunegala',
-    'Anuradhapura',
-    'Polonnaruwa',
-    'Badulla',
-    'Monaragala',
-    'Ratnapura',
-    'Kegalle',
-    'Ampara',
-    'Batticaloa',
-    'Trincomalee'].map((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                  ),
-                ],
-              );
-            },
-          ),
-        );
-      },
     );
   }
 }

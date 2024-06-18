@@ -44,29 +44,51 @@ class _ClientHomeState extends State<ClientHome> {
               style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: kSubtitleColor),
               ),
 
-                Text(
-              "FIXfinder" , 
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900, color: kMainColor),
-              ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                   const Text(
+                                  "FIXFinder" , 
+                                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: kMainColor),
+                                  ),
+
+                                       ElevatedButton(
+                                      onPressed: () {
+                              
+                                        Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => CheckEmployeeData()), // Navigate to the new screen
+                                   );
+                                         },
+                                       style: ElevatedButton.styleFrom(
+                                        backgroundColor: Color.fromARGB(255, 4, 4, 4),
+                                        shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                       ),
+                                       ),
+                                       child: Text('Change Account',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                             ),
+                            ],
+                           ),
 
 
               //button navigate profile 
-                 ElevatedButton(
-                      onPressed: () {
+                //  ElevatedButton(
+                //       onPressed: () {
                               
-                              Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => CheckEmployeeData()), // Navigate to the new screen
-                                   );
-                                        },
-                      style: ElevatedButton.styleFrom(
-                        iconColor: Colors.purple,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                      ),
-                      child: Text('Change Account'),
-                    ),
+                //               Navigator.push(
+                //               context,
+                //               MaterialPageRoute(builder: (context) => CheckEmployeeData()), // Navigate to the new screen
+                //                    );
+                //                         },
+                //       style: ElevatedButton.styleFrom(
+                //         iconColor: Colors.purple,
+                //         shape: RoundedRectangleBorder(
+                //           borderRadius: BorderRadius.circular(20),
+                //         ),
+                //       ),
+                //       child: Text('Change Account'),
+                //     ),
                   
                      //check req send data to the db 
 
@@ -128,7 +150,7 @@ class _ClientHomeState extends State<ClientHome> {
                     ),
                     child: ServiceCard(
                       description: "See Service Providers",
-                      imgUrl: "assets/img/electrician.png",
+                      imgUrl: "assets/img/plumber.png",
                       title: "Plumber",
                     ),
                   ),
@@ -155,7 +177,7 @@ class _ClientHomeState extends State<ClientHome> {
 
                     child: ServiceCard(
                       description: "See Service Providers",
-                      imgUrl: "assets/img/electrician.png",
+                      imgUrl: "assets/img/gardning.png",
                       title: "Gardning",
                     ),
                   ),
@@ -168,7 +190,7 @@ class _ClientHomeState extends State<ClientHome> {
                     ),
                     child: ServiceCard(
                       description: "See Service Providers",
-                      imgUrl: "assets/img/electrician.png",
+                      imgUrl: "assets/img/carpenter.png",
                       title: "Carpenter",
                     ),
                   ),

@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 class FirebaseCrud {
   static Future<void> addReview(String employeeId, String review, int rating) async {
     final user = FirebaseAuth.instance.currentUser;
+    
     if (user != null) {
       await FirebaseFirestore.instance.collection('reviews').add({
         'employeeId': employeeId,
@@ -14,6 +15,7 @@ class FirebaseCrud {
         'timestamp': FieldValue.serverTimestamp(),
       });
     }
+    
   }
 
   static Future<void> updateReview(String reviewId, String review, int rating) async {

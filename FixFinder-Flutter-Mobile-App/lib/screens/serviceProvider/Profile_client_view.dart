@@ -24,6 +24,7 @@ class _CLientViewProfileState extends State<CLientViewProfile> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   User? user;
   int requestCount = 0;
+  String currentUserName = '';
 
   Map<String, dynamic>? employeeData;
 
@@ -35,23 +36,37 @@ class _CLientViewProfileState extends State<CLientViewProfile> {
     fetchEmployeeData();
     if (user != null) {
       _fetchRequestCount();
+      _fetchClientName();
     }
   }
 
   Future<void> _fetchRequestCount() async {
-    if (user != null) {
-      String userEmail = user!.email!;
-      QuerySnapshot querySnapshot =
-          await FirebaseCrud.readEmployeeForUser(userEmail).first;
-      if (querySnapshot.docs.isNotEmpty) {
-        var userData = querySnapshot.docs.first.data() as Map<String, dynamic>;
-        String employeeId = querySnapshot.docs.first.id; // Get the document ID
-        int count =
-            await FirebaseRequestCrude.countRequestsForEmployee(employeeId);
-        setState(() {
-          requestCount = count; // rebuild ()
-        });
+    int count =
+        await FirebaseRequestCrude.countRequestsForEmployee(widget.employeeId);
+    setState(() {
+      requestCount = count; // rebuild ()
+    });
+  }
+
+  Future<void> _fetchClientName() async {
+    try {
+      if (user != null) {
+        String? userEmail = user!.email;
+        QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+            .collection('Projects')
+            .where('email', isEqualTo: userEmail)
+            .get();
+        if (querySnapshot.docs.isNotEmpty) {
+          setState(() {
+            currentUserName = (querySnapshot.docs.first.data() as Map<String, dynamic>)['client_name'] ?? '';
+
+          });
+        }else{
+           print('No matching user found in Projects collection');
+        }
       }
+    } catch (e) {
+      print('Error fetching client name: $e');
     }
   }
 
@@ -93,19 +108,14 @@ class _CLientViewProfileState extends State<CLientViewProfile> {
                   Container(
                     decoration: const BoxDecoration(
                       color: Color.fromARGB(255, 20, 53, 189),
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
-                        bottomLeft: Radius.circular(30),
-                        bottomRight: Radius.circular(30),
-                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(30)),
                     ),
                     child: const Padding(
-                      padding: const EdgeInsets.symmetric(
+                      padding: EdgeInsets.symmetric(
                           horizontal: 16.0, vertical: 40.0),
                       child: Column(
                         children: [
-                          const Row(
+                          Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
@@ -118,7 +128,7 @@ class _CLientViewProfileState extends State<CLientViewProfile> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text(
+                              Text(
                                 "Profile",
                                 style: TextStyle(
                                     color: Color.fromARGB(255, 255, 255, 255),
@@ -127,7 +137,7 @@ class _CLientViewProfileState extends State<CLientViewProfile> {
                               ),
                             ],
                           ),
-                          const SizedBox(height: 10),
+                          SizedBox(height: 10),
                         ],
                       ),
                     ),
@@ -152,7 +162,7 @@ class _CLientViewProfileState extends State<CLientViewProfile> {
                           ),
                           const SizedBox(height: 10),
                           Text(
-                            widget.employeeName ?? 'No Name',
+                            widget.employeeName,
                             style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -182,10 +192,9 @@ class _CLientViewProfileState extends State<CLientViewProfile> {
                   Row(
                     children: [
                       const Text(
-                        'Hire', // Display the request count
-                        textAlign: TextAlign.start, // Center-align the text
-                        style: const TextStyle(
-                          // backgroundColor: Color.fromARGB(255, 39, 98, 247), // Background color
+                        'Hire',
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
                           color: Color.fromARGB(255, 0, 0, 0),
                           fontSize: 0,
                           fontWeight: FontWeight.w400,
@@ -216,18 +225,18 @@ class _CLientViewProfileState extends State<CLientViewProfile> {
                             context,
                             MaterialPageRoute(
                               builder: (context) => ClientReviewScreen(
-                                  employeeId: widget.employeeId),
+                                  employeeId: widget.employeeId,
+                                   clientName: currentUserName),
                             ),
                           );
                         },
                         child: Text('Reviews & Ratings'),
                       ),
-                      ElevatedButton(onPressed: () {
-                        _dialPhoneNumber(employeeData!['contact_no']);
-                      },
-                       
-                       child: Text('Call'),
-                      
+                      ElevatedButton(
+                        onPressed: () {
+                          _openDialer(employeeData!['contact_no']);
+                        },
+                        child: Text('Call'),
                       )
                     ],
                   ),
@@ -238,17 +247,17 @@ class _CLientViewProfileState extends State<CLientViewProfile> {
     );
   }
 
+  void _openDialer(String phoneNumber) async {
+    final Uri _phoneLaunchUri = Uri(scheme: 'tel', path: phoneNumber);
 
-
-  void _dialPhoneNumber(String number) async {
-    final Uri launchUri = Uri(
-      scheme: 'tel',
-      path: number,
-    );
-    if (await canLaunchUrl(launchUri)) {
-      await launchUrl(launchUri);
-    } else {
-      throw 'Could not launch $number';
+    try {
+      if (await canLaunchUrl(_phoneLaunchUri)) {
+        await launch(_phoneLaunchUri.toString());
+      } else {
+        throw 'Could not launch $phoneNumber';
+      }
+    } catch (e) {
+      print('Error: $e');
     }
   }
 }
@@ -289,6 +298,4 @@ class ProfileDetailField extends StatelessWidget {
       ),
     );
   }
-
-  
 }
