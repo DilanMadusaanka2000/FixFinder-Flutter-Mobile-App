@@ -11,20 +11,23 @@ class FrontPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-
-      children: [
-          
-          Image.asset("assets/images/appicon.png", 
-          width: 100,
-           fit: BoxFit.cover,),
-           const SizedBox(height: 20,),
-           const Center(
-            child: Text("FixFinder", style: TextStyle(fontSize: 40 , color:kMainColor , fontWeight: FontWeight.bold),)
-           )
-             
-      ],
+    return Container(
+     // color: Colors.blue,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+      
+        children: [
+            
+            Image.asset("assets/images/appicon.png", 
+            width: 100,
+             fit: BoxFit.cover,),
+             const SizedBox(height: 20,),
+             const Center(
+              child: Text("FixFinder", style: TextStyle(fontSize: 40 , color:kMainColor , fontWeight: FontWeight.bold),)
+             )
+               
+        ],
+      ),
     );
   }
 }

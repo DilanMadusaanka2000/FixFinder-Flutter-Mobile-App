@@ -119,7 +119,7 @@ class _ClientHomeState extends State<ClientHome> {
               const SizedBox(height: 20,
               ),
 
-              Text(" Today's Service",style: TextStyle(fontSize: 18, 
+              Text(" Contact Now",style: TextStyle(fontSize: 18, 
               fontWeight: FontWeight.bold), ),
 
               const SizedBox(height: 10,),

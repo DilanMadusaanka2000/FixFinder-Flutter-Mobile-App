@@ -12,6 +12,8 @@ class SharedOnbordingScreen extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Column(
+        //crossAxisAlignment: CrossAxisAlignment.center,
+        // mainAxisAlignment: MainAxisAlignment.center,
       
       
         children: [
@@ -29,7 +31,7 @@ class SharedOnbordingScreen extends StatelessWidget {
            const SizedBox(height:20 ,),
       
           Text(appDescription, 
-         style:  TextStyle(fontSize: 15, fontWeight: FontWeight.w300, color: Colors.grey) ,)
+         style:  TextStyle(fontSize: 15, fontWeight: FontWeight.w300, color: Colors.grey,) ,)
         ],
       ),
     );

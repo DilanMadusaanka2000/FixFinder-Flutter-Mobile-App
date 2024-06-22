@@ -119,7 +119,7 @@ class _CLientViewProfileState extends State<CLientViewProfile> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "SATURDAY, JANUARY 16",
+                                "Welcome Back",
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 14),
                               ),
@@ -231,12 +231,23 @@ class _CLientViewProfileState extends State<CLientViewProfile> {
                           );
                         },
                         child: Text('Reviews & Ratings'),
+                       
                       ),
-                      ElevatedButton(
-                        onPressed: () {
-                          _openDialer(employeeData!['contact_no']);
+                     ElevatedButton.icon(
+                   onPressed: () {
+                    _openDialer(employeeData!['contact_no']);
                         },
-                        child: Text('Call'),
+                      icon:const Icon(
+                         Icons.phone, // Replace with your desired icon (e.g., Icons.call)
+                         color: Colors.white, // Adjust icon color if needed
+                         ),
+                       label: Text(
+                          'Call',
+                        style: TextStyle(color: Colors.white),
+                        ),
+                       style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue, // Change to your desired color
+                       ),
                       )
                     ],
                   ),

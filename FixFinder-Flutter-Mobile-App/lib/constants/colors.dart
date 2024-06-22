@@ -7,7 +7,7 @@ const Color mainBlue = Color(0xff5689c0);
 
 const Color lightBlue = Color(0xff75e2ff);
 
-const Color cardColor = Color.fromARGB(255, 228, 222, 222);
+const Color cardColor = Color.fromARGB(255, 236, 240, 244);
 
 const Color darkBlue = Color(0xff244d61);
 

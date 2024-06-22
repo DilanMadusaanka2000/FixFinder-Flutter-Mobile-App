@@ -11,7 +11,7 @@ class ServiceCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
      width: MediaQuery.of(context).size.width *0.46,
-      height: 250,
+      height: 200,
      // width: 250,
    
 
@@ -20,7 +20,7 @@ class ServiceCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(15),
       boxShadow: const [
         BoxShadow(
-          color: Color.fromARGB(31, 73, 106, 156),
+          color: Color.fromARGB(31, 75, 130, 212),
           offset: Offset(0, 5),
           blurRadius: 2,
         )
@@ -46,7 +46,7 @@ class ServiceCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 5,),
-            Image.asset(imgUrl, width: 150,
+            Image.asset(imgUrl, width: 80,
             fit: BoxFit.cover,
             ),
             const SizedBox(height: 5,),

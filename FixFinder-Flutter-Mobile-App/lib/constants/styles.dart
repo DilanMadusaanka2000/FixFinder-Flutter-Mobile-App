@@ -5,6 +5,7 @@ const TextStyle descriptionStyle = TextStyle(
   fontSize: 15,
   color: textColor,
   fontWeight: FontWeight.w400,
+  
 );
 
 const textInputDecoration = InputDecoration(
@@ -12,11 +13,11 @@ const textInputDecoration = InputDecoration(
   fillColor: bgSolitude,
   filled: true,
   enabledBorder: OutlineInputBorder(
-    borderSide: BorderSide(color: lightBlue, width: 2),
+    borderSide: BorderSide(color: Colors.black, width: 2),
     borderRadius: BorderRadius.all(Radius.circular(100)),
   ),
   focusedBorder: OutlineInputBorder(
-    borderSide: BorderSide(color: lightBlue, width: 2),
+    borderSide: BorderSide(color: Colors.black, width: 2),
     borderRadius: BorderRadius.all(Radius.circular(100)),
   ),
 );
