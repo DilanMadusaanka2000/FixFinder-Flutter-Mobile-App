@@ -4,6 +4,7 @@ import 'package:intl/intl.dart'; // For date formatting
 import '../../service/firebase_service_request.dart'; // Import the CRUD service
 import '../../models/response.dart';
 
+
 class ClientRequest extends StatefulWidget {
   final String employeeName;
   final String employeeId;
@@ -25,6 +26,7 @@ class _ClientRequestState extends State<ClientRequest> {
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _contactNoController = TextEditingController();
   final TextEditingController _dateController = TextEditingController();
+  final TextEditingController _locationController = TextEditingController();
 
   @override
   void dispose() {
@@ -33,15 +35,22 @@ class _ClientRequestState extends State<ClientRequest> {
     _descriptionController.dispose();
     _contactNoController.dispose();
     _dateController.dispose();
+    _locationController.dispose();
     super.dispose();
   }
+
+
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Client Request Form',
+          'Hire Now',
           style: TextStyle(fontWeight: FontWeight.w800, fontSize: 25),
         ),
         actions: [
@@ -147,6 +156,8 @@ class _ClientRequestState extends State<ClientRequest> {
                         },
                       ),
                       SizedBox(height: 20),
+                     
+                      SizedBox(height: 20),
                       ElevatedButton(
                         onPressed: () async {
                           if (_formKey.currentState?.validate() ?? false) {
@@ -157,6 +168,7 @@ class _ClientRequestState extends State<ClientRequest> {
                               descreption: _descriptionController.text,
                               contactno: _contactNoController.text,
                               date: _dateController.text,
+                              location: _locationController.text,
                               employeeName: widget.employeeName,
                               employeeId: widget.employeeId,
                             );

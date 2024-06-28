@@ -68,6 +68,7 @@ class EditPage extends StatefulWidget {
   State<StatefulWidget> createState() {
     return _EditPage();
   }
+
 }
 
 class _EditPage extends State<EditPage> {
@@ -142,6 +143,36 @@ class _EditPage extends State<EditPage> {
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
       ),
     );
+
+
+ //district
+     final districtField = DropdownButtonFormField<String>(
+      value: widget._selectedDistrict,
+      items: widget.districts.map((String district) {
+        return DropdownMenuItem<String>(
+          value: district,
+          child: Text(district),
+        );
+      }).toList(),
+      onChanged: (String? value) {
+        setState(() {
+          widget._selectedDistrict = value;
+        });
+      },
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Please select a district';
+        }
+        return null;
+      },
+      decoration: InputDecoration(
+        contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+        hintText: "District",
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+      ),
+    );
+
+
 
     final contactField = TextFormField(
       controller: _employee_contact,
@@ -242,64 +273,73 @@ class _EditPage extends State<EditPage> {
           ]),
       body: Padding(
         padding: const EdgeInsets.only(top: 50.0),
-        child: Container(
-          decoration: const BoxDecoration(
-            color: Color.fromARGB(255, 98, 158, 241),
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(70),
-              topRight: Radius.circular(70),
-              bottomLeft: Radius.circular(20),
-              bottomRight: Radius.circular(20),
+        child: SingleChildScrollView( // Wrap with SingleChildScrollView
+          child: Container(
+            decoration: const BoxDecoration(
+              color: Color.fromARGB(255, 98, 158, 241),
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(70),
+                topRight: Radius.circular(70),
+                bottomLeft: Radius.circular(20),
+                bottomRight: Radius.circular(20),
+              ),
             ),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Form(
-                key: _formKey,
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      const SizedBox(height: 25.0),
-                      Text(
-                        "Name",
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.w200),
-                      ),
-                      nameField,
-                      const SizedBox(height: 25.0),
-                      Text(
-                        "Posittion",
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.w200),
-                      ),
-                      positionField,
-                      const SizedBox(height: 35.0),
-                      Text(
-                        "Experience",
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.w200),
-                      ),
-                      experienceField,
-                      const SizedBox(height: 35.0),
-                      Text(
-                        "Contatct",
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.w200),
-                      ),
-                      contactField,
-                      viewListButton,
-                      const SizedBox(height: 45.0),
-                      saveButton,
-                      const SizedBox(height: 15.0),
-                    ],
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Form(
+                  key: _formKey,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        const SizedBox(height: 25.0),
+                        const Text(
+                          "Name",
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.w200),
+                        ),
+                        nameField,
+                        const SizedBox(height: 25.0),
+                        const Text(
+                          "Position",
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.w200),
+                        ),
+                        positionField,
+                        const SizedBox(height: 25.0),
+                        const Text(
+                          "Experience",
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.w200),
+                        ),
+                        experienceField,
+                        const SizedBox(height: 25.0),
+                        const Text(
+                          "District",
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.w200),
+                        ),
+                        districtField,
+                        const SizedBox(height: 25.0),
+                        const Text(
+                          "Contact",
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.w200),
+                        ),
+                        contactField,
+                        viewListButton,
+                        const SizedBox(height: 45.0),
+                        saveButton,
+                        const SizedBox(height: 15.0),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

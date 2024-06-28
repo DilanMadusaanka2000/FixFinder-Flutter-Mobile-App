@@ -28,3 +28,7 @@ const kButtonColorwithBlue = Color.fromARGB(255, 116, 197, 255);
 const kMainBkacgroundColor = Color.fromARGB(230, 125, 214, 255);
 
 
+
+const onboardingBackground = Color(0xFFE8F1FA);
+const onboardHeadertext = Color(0x2A2A2A2A);
+const onboardSubtext = Color(0x4A90E2);

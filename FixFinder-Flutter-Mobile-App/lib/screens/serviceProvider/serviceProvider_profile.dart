@@ -1,5 +1,6 @@
 import 'package:checkfirebase/pages/editpage.dart';
 import 'package:checkfirebase/screens/request/client_review.dart';
+import 'package:checkfirebase/screens/serviceProvider/viewrequest.dart';
 import 'package:checkfirebase/service/firebase_service_request.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -171,8 +172,8 @@ class _ProfileState extends State<Profile> {
                                 'Hire', // Display the request count
                                  textAlign: TextAlign.start, // Center-align the text
                                   style:  TextStyle(
-                                 backgroundColor: Color.fromARGB(255, 5, 43, 180), // Background color
-                                  color: Color.fromARGB(255, 255, 255, 255),
+                                 //backgroundColor: Color.fromARGB(255, 5, 43, 180), // Background color
+                                  color: Colors.black,
                                 fontSize: 15,
                                 fontWeight: FontWeight.w400,
                                 ),
@@ -191,33 +192,21 @@ class _ProfileState extends State<Profile> {
                                       ),
 
                                      const SizedBox(width: 5),
-                                    ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => EditPage(
-                                            employee: Employee(
-                                              uid: docId,
-                                              employeename: userData["employee_name"],
-                                              
-                                            ),
-                                          ),
+                                      TextButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => ViewRequest(
+                                          employeeName: userData['employee_name'],
+                                          employeeId: docId,
+                                          
                                         ),
-                                      );
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      //iconColor: const Color.fromARGB(255, 78, 158, 224),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
                                       ),
-                                    ),
-                                    child: const Text('See',style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w200,
-                                    ),),
-                                  ),
+                                    );
+                                  },
+                                  child: Text('View'),
+                                ),
                                   ],
 
                                  

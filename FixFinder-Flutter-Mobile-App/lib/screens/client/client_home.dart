@@ -9,12 +9,11 @@ import 'package:checkfirebase/screens/client/card/meason.dart';
 import 'package:checkfirebase/screens/request/client_request.dart';
 import 'package:checkfirebase/screens/serviceProvider/serviceProvider_profile.dart';
 import 'package:checkfirebase/service/check_Employer_hasData.dart';
+import 'package:checkfirebase/widgets/progrescard2.dart';
 import 'package:checkfirebase/widgets/progressCard.dart';
 import 'package:checkfirebase/widgets/service_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-
-
 
 class ClientHome extends StatefulWidget {
   const ClientHome({super.key});
@@ -32,183 +31,115 @@ class _ClientHomeState extends State<ClientHome> {
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
-   
-       child: Padding(
-         padding: const EdgeInsets.all(kDefaultPadding),
-         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-         
-          children: [
-            Text(
-              "$formattedDate $formatterDay" , 
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: kSubtitleColor),
-              ),
-
+          child: Padding(
+            padding: const EdgeInsets.all(kDefaultPadding),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "$formattedDate $formatterDay",
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: kSubtitleColor),
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                   const Text(
-                                  "FIXFinder" , 
-                                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: kMainColor),
-                                  ),
-
-                                       ElevatedButton(
-                                      onPressed: () {
-                              
-                                        Navigator.push(
-                                        context,
-                                        MaterialPageRoute(builder: (context) => CheckEmployeeData()), // Navigate to the new screen
-                                   );
-                                         },
-                                       style: ElevatedButton.styleFrom(
-                                        backgroundColor: Color.fromARGB(255, 4, 4, 4),
-                                        shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20),
-                                       ),
-                                       ),
-                                       child: Text('Change Account',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
-                             ),
-                            ],
-                           ),
-
-
-              //button navigate profile 
-                //  ElevatedButton(
-                //       onPressed: () {
-                              
-                //               Navigator.push(
-                //               context,
-                //               MaterialPageRoute(builder: (context) => CheckEmployeeData()), // Navigate to the new screen
-                //                    );
-                //                         },
-                //       style: ElevatedButton.styleFrom(
-                //         iconColor: Colors.purple,
-                //         shape: RoundedRectangleBorder(
-                //           borderRadius: BorderRadius.circular(20),
-                //         ),
-                //       ),
-                //       child: Text('Change Account'),
-                //     ),
-                  
-                     //check req send data to the db 
-
-                    //  ElevatedButton(
-                    //   onPressed: () {
-                              
-                    //           Navigator.push(
-                    //           context,
-                    //           MaterialPageRoute(builder: (context) => ClientRequest()), // Navigate to the new screen
-                    //                );
-                    //                     },
-                    //   style: ElevatedButton.styleFrom(
-                    //     iconColor: Colors.purple,
-                    //     shape: RoundedRectangleBorder(
-                    //       borderRadius: BorderRadius.circular(20),
-                    //     ),
-                    //   ),
-                    //   child: Text('Request Service'),
-                    // ),
-
-
-
-
-
-              const SizedBox(height:20),
-              Progresscard(),
-
-              const SizedBox(height: 20,
-              ),
-
-              Text(" Contact Now",style: TextStyle(fontSize: 18, 
-              fontWeight: FontWeight.bold), ),
-
-              const SizedBox(height: 10,),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(
-                     onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Electrician()),
+                    const Text(
+                      "FIXFinder",
+                      style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: kMainColor),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => CheckEmployeeData()), // Navigate to the new screen
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color.fromARGB(255, 4, 4, 4),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
                       ),
-                    child: ServiceCard(
-                      description: "See Service Providers",
-                      imgUrl: "assets/img/electrician.png",
-                      title: "Electrician",
+                      child: Text('Change Account', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
                     ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                Progresscard(),
+                const SizedBox(height: 20),
+                Text(
+                  "Contact Now",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 10),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                
+                  child: Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Electrician()),
+                        ),
+                        child: ServiceCard(
+                          description: "See Service Providers",
+                          imgUrl: "assets/img/electrician.png",
+                          title: "Electrician",
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      GestureDetector(
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Plumber()),
+                        ),
+                        child: ServiceCard(
+                          description: "See Service Providers",
+                          imgUrl: "assets/img/plumber.png",
+                          title: "Plumber",
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      GestureDetector(
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => GardningMentainer()),
+                        ),
+                        child: ServiceCard(
+                          description: "See Service Providers",
+                          imgUrl: "assets/img/gardning.png",
+                          title: "Gardning",
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      GestureDetector(
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Carpenter()),
+                        ),
+                        child: ServiceCard(
+                          description: "See Service Providers",
+                          imgUrl: "assets/img/carpenter.png",
+                          title: "Carpenter",
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                    ],
                   ),
-
-
-      //plumber
-
-
-                  GestureDetector(
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Plumber())
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Progresscard2(),
                     ),
-                    child: ServiceCard(
-                      description: "See Service Providers",
-                      imgUrl: "assets/img/plumber.png",
-                      title: "Plumber",
-                    ),
-                  ),
-
-                 
-
-                  
-                ],
-              ),
-              const SizedBox(height: 20,),
-
-
-              //second row
-               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-
-
-                  GestureDetector(
-                    onTap:() => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => GardningMentainer())
-                    ),
-
-                    child: ServiceCard(
-                      description: "See Service Providers",
-                      imgUrl: "assets/img/gardning.png",
-                      title: "Gardning",
-                    ),
-                  ),
-
-                  GestureDetector(
-
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Carpenter())
-                    ),
-                    child: ServiceCard(
-                      description: "See Service Providers",
-                      imgUrl: "assets/img/carpenter.png",
-                      title: "Carpenter",
-                    ),
-                  ),
-                ],
-              ),
-
-
-              const SizedBox(height: 20,),
-                  
-
-            
-            ],
-         ),
-       ),
-
-
+                  ],
+                ),
+              ],
+            ),
+          ),
         ),
-        
       ),
     );
   }

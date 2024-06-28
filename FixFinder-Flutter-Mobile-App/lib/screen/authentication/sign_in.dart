@@ -1,6 +1,7 @@
 import 'package:checkfirebase/constants/colors.dart';
 import 'package:checkfirebase/constants/description.dart';
 import 'package:checkfirebase/constants/styles.dart';
+import 'package:checkfirebase/screens/client/client_home.dart';
 import 'package:checkfirebase/service/auth.dart';
 import 'package:flutter/material.dart';
 
@@ -125,6 +126,7 @@ class _SignInState extends State<SignIn> {
                                 ),
                               ),
                             ),
+
                     
                             const SizedBox(
                               width: 10,
@@ -173,6 +175,12 @@ class _SignInState extends State<SignIn> {
                                         "user not sign in those emil and password";
                     
                                   });
+                                }else{
+
+                                    Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => ClientHome()), // Replace HomePage() with your desired destination
+                                   );
                                 }
                               },
                               child: Container(

@@ -1,10 +1,14 @@
-import 'package:checkfirebase/constants/colors.dart';
+import 'package:checkfirebase/screens/client/card2/filterElectrician.dart';
+import 'package:checkfirebase/screens/client/client_home.dart';
+import 'package:checkfirebase/screens/client/client_main.dart';
 import 'package:checkfirebase/screens/request/client_request.dart';
 import 'package:checkfirebase/screens/serviceProvider/Profile_client_view.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/widgets.dart';
+//import 'client_main.dart';
 import '../../../service/firebase_crud.dart';
+//import 'Profile_client_view.dart';
+//import 'client_request.dart';
 
 class Carpenter extends StatefulWidget {
   const Carpenter({super.key});
@@ -20,25 +24,65 @@ class _CarpenterState extends State<Carpenter> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text(
-          " Carpenter",
+          "Carpenter",
           style: TextStyle(
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w800,
             fontSize: 30,
           ),
         ),
+        actions: [
 
-        // backgroundColor: Theme.of(context).primaryColor,
+          IconButton(
+            icon: Icon(Icons.home),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ClientMain()),
+              );
+            },
+          ),
+        ],
+        
       ),
-
-      //backgroundColor: kMainBkacgroundColor,
       body: Column(
+
+        
+
+        
         children: [
+       Row(
+  mainAxisAlignment: MainAxisAlignment.end,
+  children: [
+    Container(
+      margin: EdgeInsets.all(10), // Adjust margin as needed
+      child: ElevatedButton(
+        onPressed: () => _showDialog(context),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Color.fromARGB(255, 0, 0, 0), // Background color
+          //onPrimary: Colors.white, // Text color
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8), // Rounded corners
+          ),
+        ),
+        child: Text("Filter", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+      ),
+    ),
+  ],
+)
+,
+
+          // Adding the PNG file below the AppBar
           Image.asset(
             'assets/card/carpenter.png',
-            height: 260, // Adjust the height as needed
+            height: 180, // Adjust the height as needed
             width: double.infinity,
             fit: BoxFit.cover,
           ),
+
+
+
+
           Expanded(
             child: StreamBuilder<QuerySnapshot>(
               stream: FirebaseCrud.readEmployee(),
@@ -46,109 +90,98 @@ class _CarpenterState extends State<Carpenter> {
                 if (!snapshot.hasData) {
                   return const Center(child: CircularProgressIndicator());
                 }
+
                 final employees = snapshot.data!.docs.where((doc) {
                   return doc['position'] == 'Carpenter';
                 }).toList();
 
-                return Container(
-                  child: ListView.builder(
-                    itemCount: employees.length,
-                    itemBuilder: (context, index) {
-                      Map<String, dynamic> data = snapshot.data!.docs[index]
-                          .data() as Map<String, dynamic>;
-                      Color backgroundColor =
-                          (index % 2 == 0) ? Colors.blue : Colors.white;
-                      Color textColor =
-                          (index % 2 == 0) ? Colors.white : Colors.black;
-                      var employee = employees[index];
+                return ListView.builder(
+                  itemCount: employees.length,
+                  itemBuilder: (context, index) {
+                     Map<String, dynamic> data = snapshot.data!.docs[index].data() as Map<String, dynamic>;
+                      Color backgroundColor = (index % 2 == 0) ? Colors.blue : Colors.white;
+                      Color textColor = (index % 2 == 0) ? Colors.white : Colors.black;
+                    var employee = employees[index];
 
-                      Column(children: [
-                        // Add your photo here
-                        Container(
-                          margin: EdgeInsets.all(10),
-                          child: Image.asset(
-                            'assets/card/Technicians.jpg', // Replace with your image asset or network image
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ]);
 
-                      return Card(
-                        color: backgroundColor,
-                        margin: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 15),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
+                    return Card(
+                      color: backgroundColor,
+                      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        
+                      ),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          radius: 30,
+                          backgroundImage: employee['profilePictureUrl'] != null
+                              ? NetworkImage(employee['profilePictureUrl'])
+                              : null,
+                          child: employee['profilePictureUrl'] == null
+                              ? Icon(Icons.person)
+                              : null,
                         ),
-                        child: ListTile(
-                          leading: CircleAvatar(
-                            radius: 30,
-                            backgroundImage: employee['profilePictureUrl'] !=
-                                    null
-                                ? NetworkImage(employee['profilePictureUrl'])
-                                : null,
-                            child: employee['profilePictureUrl'] == null
-                                ? Icon(Icons.person)
-                                : null,
-                          ),
-                          title: Padding(
-                            padding: const EdgeInsets.all(8),
-                            child: Text(
-                              employee['employee_name'],
-                              style: TextStyle(
-                                color: textColor,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w200,
-                              ),
+                        title: Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Text(
+                            employee['employee_name'],
+                            style:  TextStyle(
+                              color:textColor,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w200,
                             ),
                           ),
-                          subtitle: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Experience: ${employee['experience']}',
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w200,
-                                  color: textColor,
-                                ),
+                        ),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Experience: ${employee['experience']}',
+                              style:  TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w200,
+                                color: textColor
                               ),
-                              Text(
-                                'Contact No: ${employee['contact_no']}',
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w200,
-                                  color: textColor,
-                                ),
+                            ),
+                            Text(
+                              'Contact No: ${employee['contact_no']}',
+                              style:  TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w200,
+                                color: textColor,
                               ),
-                              Text(
-                                'District: ${employee['district']}',
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w200,
-                                    color: textColor),
+                            ),
+                            Text(
+                              'District: ${employee['district']}',
+                              style:  TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w200,
+                                color: textColor,
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  TextButton(onPressed: () {
+                            ),
+                            // Row(
+                            //   children: [
+                            //     Expanded(child: child)
+                            //   ],
+                            // ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                TextButton(
+                                  onPressed: () {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => CLientViewProfile(
-                                          employeeName:
-                                              employee['employee_name'],
+                                          employeeName: employee['employee_name'],
                                           employeeId: employee.id,
                                         ),
                                       ),
                                     );
                                   },
                                   child: Text('View'),
-
-                                  ),
-
-
-                                  TextButton(
+                                ),
+                                TextButton(
                                   onPressed: () {
                                     Navigator.push(
                                       context,
@@ -162,22 +195,87 @@ class _CarpenterState extends State<Carpenter> {
                                   },
                                   child: Text('Hire'),
                                 ),
-
-
-                                ],
-                              )
-                            ],
-                          ),
+                              ],
+                            ),
+                          ],
                         ),
-                      );
-                    },
-                  ),
+                      ),
+                    );
+                  },
                 );
               },
             ),
           ),
         ],
       ),
+    );
+  }
+  void _showDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        String? selectedValue;
+        return AlertDialog(
+          title: Text('District'),
+          content: StatefulBuilder(
+            builder: (BuildContext context, StateSetter setState) {
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  DropdownButton<String>(
+                    hint: Text('Select District'),
+                    value: selectedValue,
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        selectedValue = newValue;
+                      });
+                      if (newValue != null) {
+                        Navigator.of(context).pop();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Filterelectrician(selectedValue: newValue),
+                          ),
+                        );
+                      }
+                    },
+                    items: <String>[ 'Colombo',
+    'Gampaha',
+    'Kalutara',
+    'Kandy',
+    'Matale',
+    'Nuwara Eliya',
+    'Galle',
+    'Matara',
+    'Hambantota',
+    'Jaffna',
+    'Kilinochchi',
+    'Mannar',
+    'Mullaitivu',
+    'Vavuniya',
+    'Puttalam',
+    'Kurunegala',
+    'Anuradhapura',
+    'Polonnaruwa',
+    'Badulla',
+    'Monaragala',
+    'Ratnapura',
+    'Kegalle',
+    'Ampara',
+    'Batticaloa',
+    'Trincomalee'].map((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
+                ],
+              );
+            },
+          ),
+        );
+      },
     );
   }
 }

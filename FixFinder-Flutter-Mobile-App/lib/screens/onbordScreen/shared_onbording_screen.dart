@@ -24,13 +24,14 @@ class SharedOnbordingScreen extends StatelessWidget {
       
           const SizedBox(height:20 ,),
       
-          Text(title, style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w700) ,),
+          Text(title, textAlign: TextAlign.center, style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w700) ,),
       
       
       
            const SizedBox(height:20 ,),
       
           Text(appDescription, 
+           textAlign: TextAlign.center,
          style:  TextStyle(fontSize: 15, fontWeight: FontWeight.w300, color: Colors.grey,) ,)
         ],
       ),

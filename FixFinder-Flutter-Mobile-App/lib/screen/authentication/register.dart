@@ -1,5 +1,6 @@
 import 'package:checkfirebase/screens/client/client_home.dart';
 import 'package:checkfirebase/screens/client/client_main.dart';
+import 'package:checkfirebase/screens/client/name.dart';
 import 'package:flutter/material.dart';
 import 'package:checkfirebase/constants/colors.dart';
 import 'package:checkfirebase/constants/description.dart';
@@ -166,7 +167,7 @@ class _RegisterState extends State<Register> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => ClientHome()),
+                                    builder: (context) => Name()),//this used navigate to the home page
                               );
                             }
                           },

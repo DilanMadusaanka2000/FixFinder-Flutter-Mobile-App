@@ -12,18 +12,21 @@ class FrontPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-     // color: Colors.blue,
+     color: onboardingBackground,
+    
+       
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
       
         children: [
-            
+
+            Text("Welcome",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.blue),),
             Image.asset("assets/images/appicon.png", 
             width: 100,
              fit: BoxFit.cover,),
              const SizedBox(height: 20,),
              const Center(
-              child: Text("FixFinder", style: TextStyle(fontSize: 40 , color:kMainColor , fontWeight: FontWeight.bold),)
+              child: Text("FixFinder", style: TextStyle(fontSize: 40 , color:Colors.blue , fontWeight: FontWeight.bold),)
              )
                
         ],

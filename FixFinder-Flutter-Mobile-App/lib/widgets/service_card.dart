@@ -11,7 +11,7 @@ class ServiceCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
      width: MediaQuery.of(context).size.width *0.46,
-      height: 200,
+      height: 150,
      // width: 250,
    
 
@@ -46,7 +46,7 @@ class ServiceCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 5,),
-            Image.asset(imgUrl, width: 80,
+            Image.asset(imgUrl, width: 50,
             fit: BoxFit.cover,
             ),
             const SizedBox(height: 5,),

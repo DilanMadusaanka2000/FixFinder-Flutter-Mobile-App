@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 final CollectionReference _Collection = _firestore.collection('Request');
 
+
 class FirebaseRequestCrude {
   //create request
   static Future<Response> createRequest({
@@ -20,6 +21,8 @@ class FirebaseRequestCrude {
     required String date,
     required String employeeName,
     required String employeeId,
+    required String location,
+
   }) async {
     Response response = Response();
     DocumentReference documentReference = _Collection.doc();
@@ -37,6 +40,7 @@ class FirebaseRequestCrude {
       "date": date,
       "employeeName": employeeName,
       "employeeId": employeeId,
+      "location":location,
 
       // "serviceProviderId":serviceProviderID,
     };

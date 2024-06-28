@@ -138,7 +138,7 @@ class _AddPage extends State<AddPage> {
           hintText: "Position",
           hintStyle: TextStyle(color: Colors.white),
           border:
-              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+          OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
       validator: (value) {
         if (value == null || value.isEmpty) {
           return 'Please select a position';

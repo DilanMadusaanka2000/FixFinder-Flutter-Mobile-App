@@ -6,6 +6,7 @@ import 'package:checkfirebase/screen/authentication/register.dart';
 import 'package:checkfirebase/screen/authentication/sign_in.dart';
 import 'package:checkfirebase/screen/wrapper.dart';
 import 'package:checkfirebase/screens/client/client_main.dart';
+import 'package:checkfirebase/screens/client/name.dart';
 import 'package:checkfirebase/screens/onbordScreen/flash_screen.dart';
 import 'package:checkfirebase/screens/onbordScreen/onboardscreen.dart';
 import 'package:checkfirebase/screens/request/client_request.dart';
@@ -70,7 +71,8 @@ class MyApp extends StatelessWidget {
 
          //home:AddPage(),
 
-         //home:OnordingScreen(),
+        // home:OnordingScreen(),
+        // home:Name(),
 
 
          // home: ClientRequest(),
