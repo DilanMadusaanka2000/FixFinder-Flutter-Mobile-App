@@ -24,23 +24,19 @@ This project highlights my expertise in cross-platform mobile app development, r
 
 ## Screenshots
 
-![onboarscreen](https://github.com/DilanMadusaanka2000/FixFinder-Flutter-Mobile-App/assets/153062149/e88f07a1-065e-46f9-b1cd-bd9107738392)
-![login](https://github.com/DilanMadusaanka2000/FixFinder-Flutter-Mobile-App/assets/153062149/6ec3c1db-a1c4-47c1-ad15-29e20d5ed1a3)
-
-![enterText](https://github.com/DilanMadusaanka2000/FixFinder-Flutter-Mobile-App/assets/153062149/bd6fec9b-32d7-4b67-b6a4-6d37a5e9539c)
-
-![mainDashboard](https://github.com/DilanMadusaanka2000/FixFinder-Flutter-Mobile-App/assets/153062149/2df2c70b-17af-4fa4-ad12-4056d08802d9)
-
-![Screenshot_1719385999](https://github.com/DilanMadusaanka2000/FixFinder-Flutter-Mobile-App/assets/153062149/64634316-59f2-4c1a-bf0c-694eab6153d2)
-![Screenshot_1719386003](https://github.com/DilanMadusaanka2000/FixFinder-Flutter-Mobile-App/assets/153062149/3fd6bbf5-cc0c-46dc-9daf-4219ecabdd1d)
-![Screenshot_1719408087](https://github.com/DilanMadusaanka2000/FixFinder-Flutter-Mobile-App/assets/153062149/c808d4c2-3c9d-48e0-8cee-3599c792c232)
-![Screenshot_1719386009](https://github.com/DilanMadusaanka2000/FixFinder-Flutter-Mobile-App/assets/153062149/958e5db4-3ced-46f1-821d-bd39e6a1f057)
-![Screenshot_1719385475](https://github.com/DilanMadusaanka2000/FixFinder-Flutter-Mobile-App/assets/153062149/ce446b42-5581-4d1c-9130-406e7de527f1)
-![Review](https://github.com/DilanMadusaanka2000/FixFinder-Flutter-Mobile-App/assets/153062149/b2c3e869-cf56-4bf9-8796-9c33f547508a)
-![Screenshot_1719257033](https://github.com/DilanMadusaanka2000/FixFinder-Flutter-Mobile-App/assets/153062149/531b72ba-58dc-46c3-b9e5-f0bb44e0b108)
-![flshScreen](https://github.com/DilanMadusaanka2000/FixFinder-Flutter-Mobile-App/assets/153062149/dcba0f7e-319e-45e0-aa42-913f19ce6cbd)
-![Screenshot_1719257033](https://github.com/DilanMadusaanka2000/FixFinder-Flutter-Mobile-App/assets/153062149/f43a8b18-bdb7-4bde-a0fa-c50c665f9fc4)
-
+<img src="https://github.com/DilanMadusaanka2000/FixFinder-Flutter-Mobile-App/assets/153062149/e88f07a1-065e-46f9-b1cd-bd9107738392" alt="onboard screen" width="300"/>
+<img src="https://github.com/DilanMadusaanka2000/FixFinder-Flutter-Mobile-App/assets/153062149/6ec3c1db-a1c4-47c1-ad15-29e20d5ed1a3" alt="login screen" width="300"/>
+<img src="https://github.com/DilanMadusaanka2000/FixFinder-Flutter-Mobile-App/assets/153062149/bd6fec9b-32d7-4b67-b6a4-6d37a5e9539c" alt="enter text screen" width="300"/>
+<img src="https://github.com/DilanMadusaanka2000/FixFinder-Flutter-Mobile-App/assets/153062149/2df2c70b-17af-4fa4-ad12-4056d08802d9" alt="main dashboard" width="300"/>
+<img src="https://github.com/DilanMadusaanka2000/FixFinder-Flutter-Mobile-App/assets/153062149/64634316-59f2-4c1a-bf0c-694eab6153d2" alt="screenshot 1" width="300"/>
+<img src="https://github.com/DilanMadusaanka2000/FixFinder-Flutter-Mobile-App/assets/153062149/3fd6bbf5-cc0c-46dc-9daf-4219ecabdd1d" alt="screenshot 2" width="300"/>
+<img src="https://github.com/DilanMadusaanka2000/FixFinder-Flutter-Mobile-App/assets/153062149/c808d4c2-3c9d-48e0-8cee-3599c792c232" alt="screenshot 3" width="300"/>
+<img src="https://github.com/DilanMadusaanka2000/FixFinder-Flutter-Mobile-App/assets/153062149/958e5db4-3ced-46f1-821d-bd39e6a1f057" alt="screenshot 4" width="300"/>
+<img src="https://github.com/DilanMadusaanka2000/FixFinder-Flutter-Mobile-App/assets/153062149/ce446b42-5581-4d1c-9130-406e7de527f1" alt="screenshot 5" width="300"/>
+<img src="https://github.com/DilanMadusaanka2000/FixFinder-Flutter-Mobile-App/assets/153062149/b2c3e869-cf56-4bf9-8796-9c33f547508a" alt="review screen" width="300"/>
+<img src="https://github.com/DilanMadusaanka2000/FixFinder-Flutter-Mobile-App/assets/153062149/531b72ba-58dc-46c3-b9e5-f0bb44e0b108" alt="screenshot 6" width="300"/>
+<img src="https://github.com/DilanMadusaanka2000/FixFinder-Flutter-Mobile-App/assets/153062149/dcba0f7e-319e-45e0-aa42-913f19ce6cbd" alt="flash screen" width="300"/>
+<img src="https://github.com/DilanMadusaanka2000/FixFinder-Flutter-Mobile-App/assets/153062149/f43a8b18-bdb7-4bde-a0fa-c50c665f9fc4" alt="screenshot 7" width="300"/>
 
 ## Getting Started
 
@@ -53,4 +49,4 @@ This project highlights my expertise in cross-platform mobile app development, r
 
 1. Clone the repository:
    ```sh
-https://github.com/DilanMadusaanka2000/FixFinder-Flutter-Mobile-App.git
+   git clone https://github.com/DilanMadusaanka2000/FixFinder-Flutter-Mobile-App.git
