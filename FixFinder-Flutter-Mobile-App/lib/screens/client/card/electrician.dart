@@ -50,27 +50,27 @@ class _ElectricianState extends State<Electrician> {
 
         
         children: [
-       Row(
-  mainAxisAlignment: MainAxisAlignment.end,
-  children: [
-    Container(
-      margin: EdgeInsets.all(10), // Adjust margin as needed
-      child: ElevatedButton(
-        onPressed: () => _showDialog(context),
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Color.fromARGB(255, 0, 0, 0), // Background color
-          //onPrimary: Colors.white, // Text color
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8), // Rounded corners
-          ),
-        ),
-        child: Text("Filter", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
-      ),
-    ),
-  ],
-)
-,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                 children: [
+                   Container(
+                    margin: EdgeInsets.all(10), // Adjust margin as needed
+                     child: ElevatedButton(
+                       onPressed: () => _showDialog(context),
+                       style: ElevatedButton.styleFrom(
+                         backgroundColor: Color.fromARGB(255, 0, 0, 0), // Background color
+                         //onPrimary: Colors.white, // Text color
+                         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                         shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8), // Rounded corners
+                       ),
+                     ),
+                        child: Text("Filter", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                    ),
+                  ),
+            ],
+            )
+              ,
 
           // Adding the PNG file below the AppBar
           Image.asset(

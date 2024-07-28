@@ -20,6 +20,7 @@ class _ViewRequestState extends State<ViewRequest> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   User? user;
   List<DocumentSnapshot> requestList = []; // List to store fetched requests
+  Set<String> completedRequests = {}; // Set to store completed requests locally
 
   @override
   void initState() {
@@ -49,6 +50,21 @@ class _ViewRequestState extends State<ViewRequest> {
     }
   }
 
+  Future<void> markAsCompleted(String requestId) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('Request')
+          .doc(requestId)
+          .update({'status': 'completed'});
+
+      setState(() {
+        completedRequests.add(requestId);
+      });
+    } catch (e) {
+      print('Error updating request: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,6 +79,8 @@ class _ViewRequestState extends State<ViewRequest> {
               itemCount: requestList.length,
               itemBuilder: (context, index) {
                 var requestData = requestList[index].data() as Map<String, dynamic>;
+                String requestId = requestList[index].id;
+                bool isCompleted = completedRequests.contains(requestId) || requestData['status'] == 'completed';
 
                 return Card(
                   margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
@@ -92,7 +110,7 @@ class _ViewRequestState extends State<ViewRequest> {
                         ),
                         SizedBox(height: 10.0),
                         Text(
-                          'Email: ${requestData['emil']}',
+                          'Email: ${requestData['email']}',
                           style: TextStyle(fontSize: 16.0),
                         ),
                         SizedBox(height: 10.0),
@@ -100,19 +118,22 @@ class _ViewRequestState extends State<ViewRequest> {
                           'Date: ${requestData['date']}',
                           style: TextStyle(fontSize: 16.0),
                         ),
-                        // Text(
-                        //   'Employee Name: ${requestData['employeeName']}',
-                        //   style: TextStyle(fontSize: 16.0),
-                        // ),
                         SizedBox(height: 10.0),
                         Row(
-                          
-                        mainAxisAlignment: MainAxisAlignment.end,
-
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                               Text("Make Completed", style:TextStyle(fontWeight: FontWeight.bold,fontSize: 16)),
-                        ],)
-                       
+                            ElevatedButton(
+                              onPressed: isCompleted ? null : () => markAsCompleted(requestId),
+                              child: Text(
+                                "Make Completed",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ),

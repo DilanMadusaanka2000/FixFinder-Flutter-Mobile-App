@@ -69,7 +69,7 @@ class _ProfileState extends State<Profile> {
                       Container(
                         decoration: const BoxDecoration(
                           //color: Color.fromARGB(255, 20, 53, 189),
-                          gradient: LinearGradient(colors: [Color.fromARGB(255, 0, 114, 207), Color.fromARGB(255, 98, 199, 246)],
+                          gradient: LinearGradient(colors: [Color.fromARGB(255, 255, 255, 255), Color.fromARGB(255, 255, 255, 255)],
                           begin:Alignment.topLeft,
                           end:Alignment.bottomRight),
                           boxShadow: [
@@ -91,7 +91,7 @@ class _ProfileState extends State<Profile> {
                                 children: [
                                   Text(
                                     "SATURDAY, JANUARY 16",
-                                    style: TextStyle(color: Colors.white, fontSize: 14),
+                                    style: TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontSize: 14),
                                   ),
                                 ],
                               ),
@@ -100,7 +100,7 @@ class _ProfileState extends State<Profile> {
                                 children: [
                                   const Text(
                                     "Profile",
-                                    style: TextStyle(color: Color.fromARGB(255, 255, 255, 255), fontSize: 30, fontWeight: FontWeight.w800),
+                                    style: TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontSize: 30, fontWeight: FontWeight.w800),
                                   ),
                                   ElevatedButton(
                                     onPressed: () {
@@ -121,7 +121,7 @@ class _ProfileState extends State<Profile> {
                                       );
                                     },
                                     style: ElevatedButton.styleFrom(
-                                      iconColor: const Color.fromARGB(255, 78, 158, 224),
+                                      iconColor: Color.fromARGB(255, 0, 0, 0),
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(20),
                                       ),
@@ -169,12 +169,12 @@ class _ProfileState extends State<Profile> {
                              Row(
                                  children: [
                                  const Text(
-                                'Hire', // Display the request count
+                                'Jobs request ', // Display the request count
                                  textAlign: TextAlign.start, // Center-align the text
                                   style:  TextStyle(
                                  //backgroundColor: Color.fromARGB(255, 5, 43, 180), // Background color
                                   color: Colors.black,
-                                fontSize: 15,
+                                fontSize: 25,
                                 fontWeight: FontWeight.w400,
                                 ),
                               ),
@@ -205,7 +205,8 @@ class _ProfileState extends State<Profile> {
                                       ),
                                     );
                                   },
-                                  child: Text('View'),
+                                  child: Text('View',
+                                  ),
                                 ),
                                   ],
 

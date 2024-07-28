@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart'; // For date formatting
 import '../../service/firebase_service_request.dart'; // Import the CRUD service
 import '../../models/response.dart';
-
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class ClientRequest extends StatefulWidget {
   final String employeeName;
@@ -39,11 +42,31 @@ class _ClientRequestState extends State<ClientRequest> {
     super.dispose();
   }
 
+  Future<void> sendNotification(String token, String message) async {
+    final String serverKey = 'YOUR_SERVER_KEY'; // Replace with your FCM server key
+    final url = Uri.parse('https://fcm.googleapis.com/fcm/send');
 
+    final response = await http.post(
+      url,
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+        'Authorization': 'key=$serverKey',
+      },
+      body: jsonEncode(<String, dynamic>{
+        'to': token,
+        'notification': <String, dynamic>{
+          'title': 'New Request',
+          'body': message,
+        },
+      }),
+    );
 
-
-
-
+    if (response.statusCode == 200) {
+      print('Notification sent successfully');
+    } else {
+      print('Failed to send notification: ${response.statusCode}');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -161,8 +184,7 @@ class _ClientRequestState extends State<ClientRequest> {
                       ElevatedButton(
                         onPressed: () async {
                           if (_formKey.currentState?.validate() ?? false) {
-                            Response response =
-                                await FirebaseRequestCrude.createRequest(
+                            Response response = await FirebaseRequestCrude.createRequest(
                               clientname: _clientNameController.text,
                               address: _addressController.text,
                               descreption: _descriptionController.text,
@@ -174,12 +196,29 @@ class _ClientRequestState extends State<ClientRequest> {
                             );
 
                             if (response.code == 200) {
-                              _formKey.currentState?.reset();
-                            }
+                              // Retrieve the FCM token for the employeeId
+                              DocumentSnapshot employeeDoc = await FirebaseFirestore.instance
+                                  .collection('serviceProviders')
+                                  .doc(widget.employeeId)
+                                  .get();
 
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text("Send")),
-                            );
+                              String? token = employeeDoc['fcmToken'];
+
+                              if (token != null) {
+                                // Send the notification
+                                await sendNotification(token, 'New service request from ${_clientNameController.text}');
+                              }
+
+                              _formKey.currentState?.reset();
+
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text("Request sent and notification delivered")),
+                              );
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text("Failed to send request")),
+                              );
+                            }
                           }
                         },
                         child: Text(

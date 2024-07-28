@@ -1,6 +1,7 @@
 import 'package:checkfirebase/constants/colors.dart';
 import 'package:checkfirebase/models/employer.dart';
 import 'package:checkfirebase/screens/request/client_request.dart';
+import 'package:checkfirebase/screens/serviceProvider/Profile_client_view.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
@@ -98,8 +99,18 @@ class _PlumberState extends State<Plumber> {
                           children: [
                             TextButton(
                               onPressed: () {
+                                 Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => CLientViewProfile(
+                                          employeeName: employee['employee_name'],
+                                          employeeId: employee.id,
+                                        ),
+                                      ),
+                                    );
                                 // Handle view button press
                               },
+                              
                               child: Text('View'),
                             ),
                             TextButton(

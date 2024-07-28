@@ -93,7 +93,7 @@ class _CLientViewProfileState extends State<CLientViewProfile> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          " Electrician",
+          "Home",
           style: TextStyle(
             fontWeight: FontWeight.w500,
             fontSize: 30,
