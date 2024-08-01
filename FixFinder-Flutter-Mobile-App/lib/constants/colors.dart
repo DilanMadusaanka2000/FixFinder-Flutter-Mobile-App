@@ -29,6 +29,6 @@ const kMainBkacgroundColor = Color.fromARGB(230, 125, 214, 255);
 
 
 
-const onboardingBackground = Color(0xFFE8F1FA);
+const onboardingBackground = Color.fromARGB(255, 0, 90, 180);
 const onboardHeadertext = Color(0x2A2A2A2A);
 const onboardSubtext = Color(0x4A90E2);

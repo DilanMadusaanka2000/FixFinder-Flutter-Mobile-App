@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ViewRequest extends StatefulWidget {
   final String employeeName;
@@ -104,10 +105,32 @@ class _ViewRequestState extends State<ViewRequest> {
                           style: TextStyle(fontSize: 16.0),
                         ),
                         SizedBox(height: 10.0),
-                        Text(
-                          'Contact Number: ${requestData['contact_no']}',
-                          style: TextStyle(fontSize: 16.0),
-                        ),
+                       Row(
+                    children: [
+                         Expanded(
+                            child: Text(
+                              'Contact Number: ${requestData['contact_no']}',
+                               style: TextStyle(fontSize: 16.0),
+                                   ),
+                                     ),
+            SizedBox(width: 10.0),
+            ElevatedButton(
+              onPressed: () {
+
+                 _openDialer(requestData!['contact_no']);
+                // Handle button press here
+                //print('Button pressed!');
+              },
+              child: Text(
+                "Call",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
+              ),
+            ),
+          ],
+        ),
                         SizedBox(height: 10.0),
                         Text(
                           'Email: ${requestData['email']}',
@@ -141,5 +164,23 @@ class _ViewRequestState extends State<ViewRequest> {
               },
             ),
     );
+
+
+
+
+  }
+
+    void _openDialer(String phoneNumber) async {
+    final Uri _phoneLaunchUri = Uri(scheme: 'tel', path: phoneNumber);
+
+    try {
+      if (await canLaunchUrl(_phoneLaunchUri)) {
+        await launch(_phoneLaunchUri.toString());
+      } else {
+        throw 'Could not launch $phoneNumber';
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
   }
 }

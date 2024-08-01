@@ -258,6 +258,8 @@ class _CLientViewProfileState extends State<CLientViewProfile> {
     );
   }
 
+
+//phone call method 
   void _openDialer(String phoneNumber) async {
     final Uri _phoneLaunchUri = Uri(scheme: 'tel', path: phoneNumber);
 

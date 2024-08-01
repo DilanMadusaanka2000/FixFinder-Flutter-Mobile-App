@@ -46,6 +46,7 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue,
       body: user != null
           ? StreamBuilder<QuerySnapshot>(
               stream: FirebaseCrud.readEmployeeForUser(user!.email!),
@@ -133,7 +134,7 @@ class _ProfileState extends State<Profile> {
                               const SizedBox(height: 20),
                               CircleAvatar(
                                 radius: 50,
-                                backgroundColor: const Color.fromARGB(255, 255, 254, 247),
+                                backgroundColor: Color.fromARGB(255, 44, 131, 223),
                                 backgroundImage: userData['profilePictureUrl'] != null
                                     ? NetworkImage(userData['profilePictureUrl']) as ImageProvider<Object>?
                                     : const AssetImage('assets/avatar.jpg') as ImageProvider<Object>?, // Replace with your default image asset
